@@ -13,9 +13,19 @@ class FirstModel: SceneActionReceiver {
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
     //output
+    var manViewModel: PersonListViewModel {
+        return privateManViewModel
+    }
+    
+    var womanViewModel: PersonListViewModel {
+        return privateWomanViewModel
+    }
     
     //properties
     private var repository: RepositoryProtocol
+    
+    private var privateManViewModel: PersonListViewModel = PersonListViewModel()
+    private var privateWomanViewModel: PersonListViewModel = PersonListViewModel()
     
     init(repository: RepositoryProtocol) {
         self.repository = repository

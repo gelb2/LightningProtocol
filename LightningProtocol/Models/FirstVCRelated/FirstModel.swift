@@ -35,7 +35,9 @@ class FirstModel: SceneActionReceiver {
     }
     
     func populateData() {
-        
+        Task {
+            await requestAPI()
+        }
     }
     
     private func bind() {

@@ -42,9 +42,9 @@ class PersonListViewModel {
     }
     
     private func populateEntity(entity: RandomPeopleEntity) async {
-        let data = entity.results.map { result -> PersonCellModel in
+        privateDataSource = entity.results.map { result -> PersonCellModel in
             let cellModel = PersonCellModel()
-            cellModel.name = result.name.title + result.name.first + result.name.last
+            cellModel.name = result.name.title + " " + result.name.first + " " + result.name.last
             cellModel.location = result.location.country + "/" + result.location.state + "/" + result.location.city
             cellModel.email = result.email
             cellModel.uuid = result.login.uuid

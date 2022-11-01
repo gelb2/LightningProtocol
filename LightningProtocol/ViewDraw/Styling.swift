@@ -25,6 +25,7 @@ protocol Styleable { }
 extension UIView: Styleable { }
 extension UIBarButtonItem: Styleable { }
 extension UINavigationItem: Styleable { }
+extension UICollectionViewFlowLayout: Styleable { }
 
 extension Styleable {
     @discardableResult

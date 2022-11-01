@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// TODO: 이미지 캐시 처리 관련 로직 재수정
 class CacheImageView: UIImageView {
 
     var lastImageURLString: String?

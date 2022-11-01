@@ -12,8 +12,12 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     var viewModel: PersonListViewModel
     
     // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
-    private let layout = UICollectionViewFlowLayout()
-    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//    private let layout = UICollectionViewFlowLayout()
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: listLayout)
+    
+    lazy var listLayout = createListLayout()
+    lazy var gridLayout = createGridLayout()
+    
     private let reuseIdentifier = "PersonRowCell"
     
     let refreshControl = UIRefreshControl()
@@ -39,6 +43,52 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
         // Drawing code
     }
     */
+    
+    private func createListLayout() -> UICollectionViewCompositionalLayout {
+        
+        let itemFractionalWidthFraction = 1.0
+        let groupFractionalHeightFraction = 1.0 / 6.0
+        let itemInset: CGFloat = 2.5
+        
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractionalWidthFraction), heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
+        
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(groupFractionalHeightFraction))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    private func createGridLayout() -> UICollectionViewCompositionalLayout {
+        let itemFractionalWidthFraction = 1.0 / 2.0
+        let groupFractionalHeightFraction = 1.0 / 4.0
+        let itemInset: CGFloat = 2.5
+        
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractionalWidthFraction), heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
+        
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(groupFractionalHeightFraction))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
 
 }
 
@@ -70,8 +120,6 @@ extension PersonContentView: Presentable {
         self.backgroundColor = .white
         collectionView.addStyles(style: collectionViewStyle)
         activityIndicator.addStyles(style: indicatorStyle)
-        
-        layout.addStyles(style: collectionViewFlowLayoutStyle)
     }
     
     func bind() {

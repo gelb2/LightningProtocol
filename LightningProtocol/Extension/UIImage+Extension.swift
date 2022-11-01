@@ -13,6 +13,7 @@ extension UIImage {
         case calendar = "calendar.circle.fill"
         case docImage = "doc.text.image"
         case errorImage = "exclamationmark.circle.fill"
+        case trashImage = "trash"
     }
     
     convenience init?(systemName: ImageName) {

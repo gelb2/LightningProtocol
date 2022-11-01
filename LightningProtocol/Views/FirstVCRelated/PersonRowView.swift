@@ -84,8 +84,6 @@ extension PersonRowView: Presentable {
     
     func bind() {
         
-        profileImageView.addGestureRecognizer(tapGesture)
-        
         didReceiveViewModel = { [weak self] model in
             guard let self = self else { return }
             self.privateCellViewModel = model
@@ -98,7 +96,6 @@ extension PersonRowView: Presentable {
     
     @objc func tapMethod() {
         print("tapMethod check")
-        privateCellViewModel.didReceiveProfileTab()
     }
     
     

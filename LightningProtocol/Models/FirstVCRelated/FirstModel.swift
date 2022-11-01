@@ -112,6 +112,19 @@ class FirstModel: SceneActionReceiver {
             let context = SceneContext(dependency: thirdModel)
             self.routeSubject?(.detail(.thirdViewController(context: context)))
         }
+        
+        didReceiveSceneAction = { [weak self] action in
+            guard let self else { return }
+            guard let action = action as? FirstSceneAction else { return }
+            
+            switch action {
+            case .refresh:
+                break
+            case .refreshWithCollectionLayout(let layout):
+                self.manViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
+                self.womanViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
+            }
+        }
     }
     
     private func requestAPI_man_NextPage(pageIndex: Int) async {

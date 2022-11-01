@@ -31,11 +31,10 @@ class ThirdModel {
             self.routeSubject?(.close)
         }
         
-        privateContentViewModel.propergateButtonTap = {
-            print("propergate button tap")
-            let context = SceneContext(dependency: FirstSceneAction.refresh)
-            
-            self.routeSubject?(.closeWithAction(.main(.firstViewControllerWithAction(context: context))))
+        privateContentViewModel.propergateButtonTap = { [weak self] type in
+            guard let self = self else { return }
+            let context = SceneContext(dependency: FirstSceneAction.refreshWithCollectionLayout(layout: type))
+            self.routeSubject?(.main(.firstViewControllerWithAction(context: context)))
         }
     }
     

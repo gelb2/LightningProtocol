@@ -15,6 +15,8 @@ class PersonListViewModel {
     var didReceiveIndexPathItem: (Int) -> () = { item in }
     var didReceiveRefreshEvent: () -> () = { }
     
+    var didReceiveRefreshCollectionLayoutEvent: (collectionType) -> () = { type in }
+    
     var didSelectItem: (Int) -> () = { indexPathItem in }
     
     //output
@@ -28,6 +30,8 @@ class PersonListViewModel {
     var populateRefreshEvent: () -> () = { }
     
     var propergateLargeImageURLString: (String) -> () = { largeImageURLString in }
+    
+    var populateRefreshCollectionLayoutEvent: (collectionType) -> () = { type in }
     
     var dataSource: [PersonCellModel] {
         return privateDataSource
@@ -91,6 +95,11 @@ class PersonListViewModel {
             guard let self = self else { return }
             let imageURL = self.findLargeImageURLString(indexPathItem)
             self.propergateLargeImageURLString(imageURL)
+        }
+        
+        didReceiveRefreshCollectionLayoutEvent = { [weak self] type in
+            guard let self = self else { return }
+            self.populateRefreshCollectionLayoutEvent(type)
         }
     }
     

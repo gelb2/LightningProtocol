@@ -153,6 +153,17 @@ extension PersonContentView: Presentable {
             guard let self = self else { return }
             self.activityIndicator.stopAnimating()
         }
+        
+        viewModel.populateRefreshCollectionLayoutEvent = { [weak self] type in
+            guard let self = self else { return }
+            print("layout type called \(type)")
+            switch type {
+            case .list:
+                self.collectionView.setCollectionViewLayout(self.listLayout, animated: true)
+            case .grid:
+                self.collectionView.setCollectionViewLayout(self.gridLayout, animated: true)
+            }
+        }
     }
     
     @objc func refresh() {

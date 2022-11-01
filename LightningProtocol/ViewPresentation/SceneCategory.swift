@@ -12,7 +12,6 @@ enum SceneCategory {
     case main(mainScene)
     case detail(detailScene)
     case close //리프래시 등 아무것도 안 하고 닫는 경우
-    indirect case closeWithAction(SceneCategory)
     case alert(alertScene)
     
     enum mainScene {

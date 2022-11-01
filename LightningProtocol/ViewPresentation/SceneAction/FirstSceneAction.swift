@@ -9,4 +9,5 @@ import Foundation
 
 enum FirstSceneAction: SceneAction {
     case refresh
+    case refreshWithCollectionLayout(layout: collectionType)
 }

@@ -17,7 +17,7 @@ class ContentViewModel {
     }
     
     var propergateTapGesture = { }
-    var propergateButtonTap = { }
+    var propergateButtonTap: (collectionType) -> () = { type in }
     
     //properties
     private var privatePopupViewModel: PopupViewModel
@@ -33,9 +33,9 @@ class ContentViewModel {
             self.propergateTapGesture()
         }
 
-        privatePopupViewModel.propergateButtonTap = { [weak self] in
+        privatePopupViewModel.propergateButtonTap = { [weak self] type in
             guard let self = self else { return }
-            self.propergateButtonTap()
+            self.propergateButtonTap(type)
         }
     }
 }

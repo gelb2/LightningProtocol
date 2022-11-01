@@ -26,8 +26,8 @@ extension PersonContentViewStyling {
             $0.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             $0.minimumLineSpacing = cellSpacing
             $0.minimumInteritemSpacing = cellSpacing
-            let width = (UIScreen.main.bounds.width - cellSpacing * 2) / columns
-            $0.itemSize = CGSize(width: width , height: width)
+            let width = (UIScreen.main.bounds.width - cellSpacing * 2)
+            $0.itemSize = CGSize(width: width , height: columns)
         }
     }
     
@@ -36,6 +36,6 @@ extension PersonContentViewStyling {
     }
     
     private var columns: CGFloat {
-        return 3.0
+        return 80.0
     }
 }

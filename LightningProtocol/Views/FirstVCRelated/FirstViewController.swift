@@ -36,7 +36,6 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("first vc viewDidLoad")
         model.populateData()
         // Do any additional setup after loading the view.
     }

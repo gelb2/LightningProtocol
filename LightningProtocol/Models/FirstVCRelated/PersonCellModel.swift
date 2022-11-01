@@ -30,7 +30,6 @@ class PersonCellModel {
 extension PersonCellModel: Equatable {
     
     static func == (lhs: PersonCellModel, rhs: PersonCellModel) -> Bool {
-        print("cellModel equatable check \(lhs.uuid == rhs.uuid)")
         return lhs.uuid == rhs.uuid
     }
     

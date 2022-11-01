@@ -95,7 +95,6 @@ extension PersonRowView: Presentable {
     }
     
     @objc func tapMethod() {
-        print("tapMethod check")
     }
     
     

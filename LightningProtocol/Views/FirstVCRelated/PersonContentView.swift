@@ -46,8 +46,9 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     }
     */
     
+    // TODO: 레이아웃 생성이 2회 이상 되는 걸로 확인...수정필요
     private func createListLayout() -> UICollectionViewCompositionalLayout {
-        
+        print("create list layout")
         let itemFractionalWidthFraction = 1.0
         let groupFractionalHeightFraction = 1.0 / 6.0
         let itemInset: CGFloat = 2.5
@@ -69,7 +70,10 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
         return UICollectionViewCompositionalLayout(section: section)
     }
     
+    // TODO: 레이아웃 생성이 2회 이상 되는 걸로 확인...수정필요
     private func createGridLayout() -> UICollectionViewCompositionalLayout {
+        print("create grid layout")
+        
         let itemFractionalWidthFraction = 1.0 / 2.0
         let groupFractionalHeightFraction = 1.0 / 4.0
         let itemInset: CGFloat = 2.5
@@ -160,16 +164,20 @@ extension PersonContentView: Presentable {
         
         viewModel.populateRefreshCollectionLayoutEvent = { [weak self] type in
             guard let self = self else { return }
-            print("layout type called \(type)")
             switch type {
             case .list:
                 self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.listLayout, animated: true)
+
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
+                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
+                
             case .grid:
                 self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.gridLayout, animated: true)
+                
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
+                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
             }
         }
     }
@@ -189,7 +197,6 @@ extension PersonContentView: UICollectionViewDelegate {
 extension PersonContentView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("viewModel count : \(viewModel.dataSource.count)")
         return viewModel.dataSource.count
     }
     
@@ -201,13 +208,11 @@ extension PersonContentView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowCellIdentitier, for: indexPath) as? PersonRowCell else { fatalError() }
             let model = viewModel.dataSource[indexPath.item]
             cell.configureCell(viewModel: model)
-            print("list cell for row")
             return cell
         case .grid:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: gridCellIdentifier, for: indexPath) as? PersonGridCell else { fatalError() }
             let model = viewModel.dataSource[indexPath.item]
             cell.configureCell(viewModel: model)
-            print("grid cell for row")
             return cell
         }
     }

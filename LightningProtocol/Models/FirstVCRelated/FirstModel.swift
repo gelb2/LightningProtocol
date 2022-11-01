@@ -15,6 +15,8 @@ class FirstModel: SceneActionReceiver {
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
     
+    @MainThreadActor var scrollSubject: ( (GenderType) -> () )?
+    
     var selectionViewModel: PersonSelectionViewModel {
         return privateSelectionViewModel
     }
@@ -49,7 +51,7 @@ class FirstModel: SceneActionReceiver {
         
         privateSelectionViewModel.propergateSelectedTypeToRelatedModel = { [weak self] genderType in
             guard let self = self else { return }
-            print("check bind and gender type : \(genderType.rawValue)")
+            self.scrollSubject?(genderType)
         }
         
         // TODO: viewmodel의 클로저가 호출되면 다시 viewModel의 didReceiveEntity를 또 부르는 구조...개선이 필요해 보인다...

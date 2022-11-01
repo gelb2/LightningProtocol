@@ -14,6 +14,7 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
     lazy var manContentView: PersonContentView = PersonContentView(viewModel: self.model.manViewModel)
     lazy var womanContentView: PersonContentView = PersonContentView(viewModel: self.model.womanViewModel)
     
+    // TODO: 스크롤뷰로 별도의 뷰로 만들고, 별도의 뷰모델을 추가해야 할까...?
     var scrollView: UIScrollView = UIScrollView()
     
     init(viewModel: FirstModel) {
@@ -107,6 +108,16 @@ extension FirstViewController: Presentable {
         model.routeSubject = { [weak self] sceneCategory in
             guard let self = self else { return }
             self.route(to: sceneCategory)
+        }
+        
+        model.scrollSubject = { [weak self] genderType in
+            guard let self = self else { return }
+            switch genderType {
+            case .male:
+                self.scrollView.scrollToView(view: self.manContentView, animated: true)
+            case .female:
+                self.scrollView.scrollToView(view: self.womanContentView, animated: true)
+            }
         }
     }
 }

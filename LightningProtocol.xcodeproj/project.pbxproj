@@ -37,10 +37,11 @@
 		36060D39290EB0720007D23C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D38290EB0720007D23C /* API.swift */; };
 		36060D3B290EB4860007D23C /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D3A290EB4860007D23C /* SecondViewControllerRoutable.swift */; };
 		36060D3D290EB4A50007D23C /* ThirdViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D3C290EB4A50007D23C /* ThirdViewControllerRoutable.swift */; };
-		36060D41290EBD060007D23C /* BasicEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D40290EBD060007D23C /* BasicEntity.swift */; };
+		36060D41290EBD060007D23C /* RandomPeopleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D40290EBD060007D23C /* RandomPeopleEntity.swift */; };
 		36060D43290EBFE20007D23C /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D42290EBFE20007D23C /* CachedImageView.swift */; };
 		36060D47290EE35B0007D23C /* PersonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D46290EE35B0007D23C /* PersonListViewModel.swift */; };
 		36060D49290EE3D60007D23C /* PersonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D48290EE3D60007D23C /* PersonListView.swift */; };
+		36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C2E2911422B00A4A241 /* PersonCellModel.swift */; };
 		36E70DD7290EA48800305231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD6290EA48800305231 /* AppDelegate.swift */; };
 		36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD8290EA48800305231 /* SceneDelegate.swift */; };
 		36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DDA290EA48800305231 /* FirstViewController.swift */; };
@@ -79,10 +80,11 @@
 		36060D38290EB0720007D23C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		36060D3A290EB4860007D23C /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36060D3C290EB4A50007D23C /* ThirdViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewControllerRoutable.swift; sourceTree = "<group>"; };
-		36060D40290EBD060007D23C /* BasicEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicEntity.swift; sourceTree = "<group>"; };
+		36060D40290EBD060007D23C /* RandomPeopleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPeopleEntity.swift; sourceTree = "<group>"; };
 		36060D42290EBFE20007D23C /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		36060D46290EE35B0007D23C /* PersonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListViewModel.swift; sourceTree = "<group>"; };
 		36060D48290EE3D60007D23C /* PersonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListView.swift; sourceTree = "<group>"; };
+		36D27C2E2911422B00A4A241 /* PersonCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCellModel.swift; sourceTree = "<group>"; };
 		36E70DD3290EA48800305231 /* LightningProtocol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningProtocol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E70DD6290EA48800305231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36E70DD8290EA48800305231 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				36060D17290EAE250007D23C /* FirstModel.swift */,
 				36060D46290EE35B0007D23C /* PersonListViewModel.swift */,
+				36D27C2E2911422B00A4A241 /* PersonCellModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -245,7 +248,7 @@
 		36060D3E290EB7640007D23C /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				36060D40290EBD060007D23C /* BasicEntity.swift */,
+				36060D40290EBD060007D23C /* RandomPeopleEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -374,7 +377,8 @@
 				36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */,
 				36060D15290EADE50007D23C /* FirstViewControllerRoutable.swift in Sources */,
 				36060D2F290EAFFA0007D23C /* NSCache+Extension.swift in Sources */,
-				36060D41290EBD060007D23C /* BasicEntity.swift in Sources */,
+				36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */,
+				36060D41290EBD060007D23C /* RandomPeopleEntity.swift in Sources */,
 				36060D2D290EAFD30007D23C /* ParkBenchTimer.swift in Sources */,
 				36060D1C290EAE680007D23C /* SecondModel.swift in Sources */,
 				36060D27290EAF2C0007D23C /* ThirdViewController.swift in Sources */,

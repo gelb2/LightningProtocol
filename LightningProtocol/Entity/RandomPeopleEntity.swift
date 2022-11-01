@@ -8,7 +8,7 @@
 // TODO: Entity
 import Foundation
 
-struct RandomPeople: Codable {
+struct RandomPeopleEntity: Codable {
     let results: [Result]
     let info: Info
 }

@@ -15,7 +15,7 @@ class PersonRowCell: UICollectionViewCell {
     
     var viewModel = PersonCellModel() {
         didSet {
-            cellView.didReceiveViewModel?(viewModel)
+            cellView.didReceiveViewModel(viewModel)
         }
     }
     

@@ -11,7 +11,7 @@ import SwiftUI
 class PersonRowView: UIView, PersonRowCellStyling {
     
     //input
-    @MainThreadActor var didReceiveViewModel: ((PersonCellModel) -> ())?
+    var didReceiveViewModel: (PersonCellModel) -> () = { model in}
     
     //output
     
@@ -22,6 +22,8 @@ class PersonRowView: UIView, PersonRowCellStyling {
     var emailLabel: UILabel = UILabel()
     var profileImageView = CacheImageView()
     var verticalStackView = UIStackView()
+    
+    private var privateCellViewModel: PersonCellModel = PersonCellModel()
     
     init() {
         super.init(frame: .zero)
@@ -81,13 +83,22 @@ extension PersonRowView: Presentable {
     }
     
     func bind() {
+        
+        profileImageView.addGestureRecognizer(tapGesture)
+        
         didReceiveViewModel = { [weak self] model in
             guard let self = self else { return }
-            self.nameLabel.text = model.name
-            self.locationLabel.text = model.location
-            self.emailLabel.text = model.email
-            self.profileImageView.loadImage(urlString: model.thumbImageURLString)
+            self.privateCellViewModel = model
+            self.nameLabel.text = self.privateCellViewModel.name
+            self.locationLabel.text = self.privateCellViewModel.location
+            self.emailLabel.text = self.privateCellViewModel.email
+            self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
         }
+    }
+    
+    @objc func tapMethod() {
+        print("tapMethod check")
+        privateCellViewModel.didReceiveProfileTab()
     }
     
     

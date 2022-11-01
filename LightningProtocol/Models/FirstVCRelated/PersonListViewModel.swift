@@ -10,15 +10,20 @@ import Foundation
 class PersonListViewModel {
     
     //input
-    var didReceiveEntity: (RandomPeopleEntity) -> () = { entity in }
+    var didReceiveEntityToRefreshAll: (RandomPeopleEntity) -> () = { entity in }
+    var didReceiveEntityToAppend: (RandomPeopleEntity) -> () = { entity in }
     var didReceiveIndexPathItem: (Int) -> () = { item in }
+    var didReceiveRefreshEvent: () -> () = { }
     
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
     @MainThreadActor var turnOnIndicator: ( ((Void)) -> () )?
     @MainThreadActor var turnOffIndicator: ( ((Void)) -> () )?
+    @MainThreadActor var turnOnRefreshControl: ( ((Void)) -> () )?
+    @MainThreadActor var turnOffRefreshControl: ( ((Void)) -> () )?
     
     var populatePageIndex: (Int) -> () = { item in }
+    var populateRefreshEvent: () -> () = { }
     
     var dataSource: [PersonCellModel] {
         return privateDataSource
@@ -34,11 +39,24 @@ class PersonListViewModel {
     }
     
     private func bind() {
-        didReceiveEntity = { [weak self] entity in
+        didReceiveEntityToRefreshAll = { [weak self] entity in
+            guard let self = self else { return }
+            Task {
+                self.pageIndex = 1
+                self.privateDataSource.removeAll()
+                self.privateDataSource = await self.populateEntity(entity: entity)
+                self.didReceiveViewModel?(())
+                self.turnOffRefreshControl?(())
+            }
+        }
+        
+        didReceiveEntityToAppend = { [weak self] entity in
             guard let self = self else { return }
             
             Task {
-                await self.populateEntity(entity: entity)
+                let newData = await self.populateEntity(entity: entity)
+                self.privateDataSource = self.privateDataSource + newData
+                // TODO: 중복되는 데이터 제거
                 self.didReceiveViewModel?(())
                 self.turnOffIndicator?(())
             }
@@ -50,11 +68,18 @@ class PersonListViewModel {
                 let nextPageIndex = self.pageIndex + 1
                 self.pageIndex = nextPageIndex
                 self.populatePageIndex(nextPageIndex)
+                self.turnOnIndicator?(())
             }
+        }
+        
+        didReceiveRefreshEvent = { [weak self] in
+            guard let self = self else { return }
+            self.turnOnRefreshControl?(())
+            self.populateRefreshEvent()
         }
     }
     
-    private func populateEntity(entity: RandomPeopleEntity) async {
+    private func populateEntity(entity: RandomPeopleEntity) async -> [PersonCellModel] {
         
         let newData = entity.results.map { result -> PersonCellModel in
             let cellModel = PersonCellModel()
@@ -67,8 +92,7 @@ class PersonListViewModel {
             cellModel.largeImageURLString = result.picture.large
             return cellModel
         }
-        
-        privateDataSource = privateDataSource + newData
+        return newData
     }
     
 }

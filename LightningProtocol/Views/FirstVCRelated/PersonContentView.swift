@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PersonContentView: UIView, PersonContentViewStyling {
+class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorViewStyling {
 
     var viewModel: PersonListViewModel
     
@@ -15,6 +15,10 @@ class PersonContentView: UIView, PersonContentViewStyling {
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private let reuseIdentifier = "PersonRowCell"
+    
+    let refreshControl = UIRefreshControl()
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     init(viewModel: PersonListViewModel) {
         self.viewModel = viewModel
@@ -41,8 +45,10 @@ class PersonContentView: UIView, PersonContentViewStyling {
 extension PersonContentView: Presentable {
     func initViewHierarchy() {
         self.addSubview(collectionView)
+        self.addSubview(activityIndicator)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraints) }
@@ -53,11 +59,17 @@ extension PersonContentView: Presentable {
             collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ]
+        
+        constraints += [
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ]
     }
     
     func configureView() {
         self.backgroundColor = .white
         collectionView.addStyles(style: collectionViewStyle)
+        activityIndicator.addStyles(style: indicatorStyle)
         
         layout.addStyles(style: collectionViewFlowLayoutStyle)
     }
@@ -67,13 +79,38 @@ extension PersonContentView: Presentable {
         collectionView.delegate = self
         collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
         viewModel.didReceiveViewModel = { [weak self] _ in
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
+        
+        viewModel.turnOnRefreshControl = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.refreshControl?.beginRefreshing()
+        }
+        
+        viewModel.turnOffRefreshControl = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.refreshControl?.endRefreshing()
+        }
+        
+        viewModel.turnOnIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.activityIndicator.startAnimating()
+        }
+        
+        viewModel.turnOffIndicator = { [weak self] _ in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+        }
     }
     
-    
+    @objc func refresh() {
+        viewModel.didReceiveRefreshEvent()
+    }
 }
 
 extension PersonContentView: UICollectionViewDelegate {

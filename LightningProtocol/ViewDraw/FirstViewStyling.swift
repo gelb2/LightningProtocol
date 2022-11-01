@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol FirstViewStyling { }
+protocol FirstViewStyling: Styleable { }
 
 extension FirstViewStyling {
     var cellTimeLabelStyling: (UILabel) -> () {

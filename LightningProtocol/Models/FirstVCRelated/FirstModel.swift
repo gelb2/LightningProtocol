@@ -43,7 +43,8 @@ class FirstModel: SceneActionReceiver {
     
     func populateData() {
         Task {
-            await requestAPI()
+            await requestAPI_man()
+            await requestAPI_woman()
         }
     }
     
@@ -58,7 +59,6 @@ class FirstModel: SceneActionReceiver {
         privateManViewModel.populatePageIndex = { [weak self] pageIndex in
             guard let self = self else { return }
             Task {
-                print("firstModel Page index check : \(pageIndex)")
                 await self.requestAPI_man_NextPage(pageIndex: pageIndex)
             }
         }
@@ -66,8 +66,21 @@ class FirstModel: SceneActionReceiver {
         privateWomanViewModel.populatePageIndex = { [weak self] pageIndex in
             guard let self = self else { return }
             Task {
-                print("firstModel Page index check : \(pageIndex)")
                 await self.requestAPI_woman_NextPage(pageIndex: pageIndex)
+            }
+        }
+        
+        privateManViewModel.populateRefreshEvent = { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.requestAPI_man()
+            }
+        }
+        
+        privateWomanViewModel.populateRefreshEvent = { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.requestAPI_woman()
             }
         }
     }
@@ -75,7 +88,7 @@ class FirstModel: SceneActionReceiver {
     private func requestAPI_man_NextPage(pageIndex: Int) async {
         do {
             let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: .male)))
-            privateManViewModel.didReceiveEntity(manEntity)
+            privateManViewModel.didReceiveEntityToAppend(manEntity)
         } catch let error {
             handleError(error: error)
         }
@@ -84,24 +97,27 @@ class FirstModel: SceneActionReceiver {
     private func requestAPI_woman_NextPage(pageIndex: Int) async {
         do {
             let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: .female)))
-            privateWomanViewModel.didReceiveEntity(manEntity)
+            privateWomanViewModel.didReceiveEntityToAppend(manEntity)
         } catch let error {
             handleError(error: error)
         }
     }
     
-    private func requestAPI() async {
-        
+    private func requestAPI_man() async {
         // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
         do {
-            // TODO: add pageIndex, resultCount for man woman view
-            // TODO: TaskGroup 이용한 동시성 처리 == 동시에 두 api 다 부르게 추가 수정
             let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: 1, gender: .male)))
+            privateManViewModel.didReceiveEntityToRefreshAll(manEntity)
+        } catch let error {
+            handleError(error: error)
+        }
+    }
+    
+    private func requestAPI_woman() async {
+        // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
+        do {
             let womanEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.woman(resultCount: 10, pageIndex: 1, gender: .female)))
-            
-            privateManViewModel.didReceiveEntity(manEntity)
-            privateWomanViewModel.didReceiveEntity(womanEntity)
-            
+            privateWomanViewModel.didReceiveEntityToRefreshAll(womanEntity)
         } catch let error {
             handleError(error: error)
         }

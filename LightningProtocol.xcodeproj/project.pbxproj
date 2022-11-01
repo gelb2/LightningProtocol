@@ -43,7 +43,9 @@
 		36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D48290EE3D60007D23C /* PersonContentView.swift */; };
 		36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C2E2911422B00A4A241 /* PersonCellModel.swift */; };
 		36D27C3129114C1200A4A241 /* PersonContentViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */; };
-		36D27C3329114D7D00A4A241 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3229114D7D00A4A241 /* PersonCell.swift */; };
+		36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3229114D7D00A4A241 /* PersonRowCell.swift */; };
+		36D27C352911510D00A4A241 /* PersonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C342911510D00A4A241 /* PersonRowView.swift */; };
+		36D27C372911566F00A4A241 /* PersonRowCellStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */; };
 		36E70DD7290EA48800305231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD6290EA48800305231 /* AppDelegate.swift */; };
 		36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD8290EA48800305231 /* SceneDelegate.swift */; };
 		36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DDA290EA48800305231 /* FirstViewController.swift */; };
@@ -88,7 +90,9 @@
 		36060D48290EE3D60007D23C /* PersonContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentView.swift; sourceTree = "<group>"; };
 		36D27C2E2911422B00A4A241 /* PersonCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCellModel.swift; sourceTree = "<group>"; };
 		36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentViewStyling.swift; sourceTree = "<group>"; };
-		36D27C3229114D7D00A4A241 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		36D27C3229114D7D00A4A241 /* PersonRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCell.swift; sourceTree = "<group>"; };
+		36D27C342911510D00A4A241 /* PersonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowView.swift; sourceTree = "<group>"; };
+		36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCellStyling.swift; sourceTree = "<group>"; };
 		36E70DD3290EA48800305231 /* LightningProtocol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningProtocol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E70DD6290EA48800305231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36E70DD8290EA48800305231 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				36060CF7290EAC440007D23C /* Styling.swift */,
 				36060CF9290EAC5A0007D23C /* FirstViewStyling.swift */,
 				36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */,
+				36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */,
 			);
 			path = ViewDraw;
 			sourceTree = "<group>";
@@ -230,7 +235,8 @@
 			children = (
 				36E70DDA290EA48800305231 /* FirstViewController.swift */,
 				36060D48290EE3D60007D23C /* PersonContentView.swift */,
-				36D27C3229114D7D00A4A241 /* PersonCell.swift */,
+				36D27C3229114D7D00A4A241 /* PersonRowCell.swift */,
+				36D27C342911510D00A4A241 /* PersonRowView.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -387,7 +393,9 @@
 				36060D41290EBD060007D23C /* RandomPeopleEntity.swift in Sources */,
 				36060D2D290EAFD30007D23C /* ParkBenchTimer.swift in Sources */,
 				36060D1C290EAE680007D23C /* SecondModel.swift in Sources */,
+				36D27C352911510D00A4A241 /* PersonRowView.swift in Sources */,
 				36060D27290EAF2C0007D23C /* ThirdViewController.swift in Sources */,
+				36D27C372911566F00A4A241 /* PersonRowCellStyling.swift in Sources */,
 				36060CF6290EAC2A0007D23C /* Presentable.swift in Sources */,
 				36060D0D290EAD7F0007D23C /* SceneContext.swift in Sources */,
 				36060D3B290EB4860007D23C /* SecondViewControllerRoutable.swift in Sources */,
@@ -399,7 +407,7 @@
 				36060CFA290EAC5A0007D23C /* FirstViewStyling.swift in Sources */,
 				36060D43290EBFE20007D23C /* CachedImageView.swift in Sources */,
 				36060CFF290EAC9F0007D23C /* UIFont+Extension.swift in Sources */,
-				36D27C3329114D7D00A4A241 /* PersonCell.swift in Sources */,
+				36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */,
 				36060D29290EAF9F0007D23C /* MainThreadActor.swift in Sources */,
 				36060D0F290EADA30007D23C /* SceneCategory.swift in Sources */,
 				36060D39290EB0720007D23C /* API.swift in Sources */,

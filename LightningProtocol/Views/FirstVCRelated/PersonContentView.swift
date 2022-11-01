@@ -14,7 +14,7 @@ class PersonContentView: UIView, PersonContentViewStyling {
     // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    private let reuseIdentifier = "PersonCell"
+    private let reuseIdentifier = "PersonRowCell"
     
     init(viewModel: PersonListViewModel) {
         self.viewModel = viewModel
@@ -65,7 +65,7 @@ extension PersonContentView: Presentable {
     func bind() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(PersonCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         viewModel.didReceiveViewModel = { [weak self] _ in
             guard let self = self else { return }
@@ -89,7 +89,7 @@ extension PersonContentView: UICollectionViewDataSource {
     
     // TODO: 컴포지셔널 레이아웃에 따른 셀 디큐 다르게 하기 처리?
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PersonCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PersonRowCell else {
             fatalError()
         }
         let model = viewModel.dataSource[indexPath.item]

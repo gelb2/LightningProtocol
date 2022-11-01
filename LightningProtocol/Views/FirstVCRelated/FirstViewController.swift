@@ -10,7 +10,7 @@ import UIKit
 class FirstViewController: UIViewController, FirstViewControllerRoutable {
 
     var model: FirstModel
-    
+    lazy var selectionView: PersonSelectionView = PersonSelectionView(viewModel: self.model.selectionViewModel)
     lazy var manContentView: PersonContentView = PersonContentView(viewModel: self.model.manViewModel)
     lazy var womanContentView: PersonContentView = PersonContentView(viewModel: self.model.womanViewModel)
     
@@ -46,10 +46,13 @@ extension FirstViewController: Presentable {
         self.view = UIView()
         navigationItem.title = "목록"
         
+        self.view.addSubview(selectionView)
         self.view.addSubview(scrollView)
+        
         scrollView.addSubview(manContentView)
         scrollView.addSubview(womanContentView)
         
+        selectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -60,7 +63,14 @@ extension FirstViewController: Presentable {
         defer { NSLayoutConstraint.activate(constraint) }
         
         constraint += [
-            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            selectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            selectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            selectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            selectionView.heightAnchor.constraint(equalToConstant: 48)
+        ]
+        
+        constraint += [
+            scrollView.topAnchor.constraint(equalTo: self.selectionView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)

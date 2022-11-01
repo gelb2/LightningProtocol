@@ -46,6 +46,9 @@
 		36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3229114D7D00A4A241 /* PersonRowCell.swift */; };
 		36D27C352911510D00A4A241 /* PersonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C342911510D00A4A241 /* PersonRowView.swift */; };
 		36D27C372911566F00A4A241 /* PersonRowCellStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */; };
+		36D27C392911659C00A4A241 /* PersonSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C382911659C00A4A241 /* PersonSelectionViewModel.swift */; };
+		36D27C3D2911696600A4A241 /* PersonSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3C2911696600A4A241 /* PersonSelectionView.swift */; };
+		36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */; };
 		36E70DD7290EA48800305231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD6290EA48800305231 /* AppDelegate.swift */; };
 		36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD8290EA48800305231 /* SceneDelegate.swift */; };
 		36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DDA290EA48800305231 /* FirstViewController.swift */; };
@@ -93,6 +96,9 @@
 		36D27C3229114D7D00A4A241 /* PersonRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCell.swift; sourceTree = "<group>"; };
 		36D27C342911510D00A4A241 /* PersonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowView.swift; sourceTree = "<group>"; };
 		36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCellStyling.swift; sourceTree = "<group>"; };
+		36D27C382911659C00A4A241 /* PersonSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectionViewModel.swift; sourceTree = "<group>"; };
+		36D27C3C2911696600A4A241 /* PersonSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectionView.swift; sourceTree = "<group>"; };
+		36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectionViewStyling.swift; sourceTree = "<group>"; };
 		36E70DD3290EA48800305231 /* LightningProtocol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningProtocol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E70DD6290EA48800305231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36E70DD8290EA48800305231 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				36060CF7290EAC440007D23C /* Styling.swift */,
 				36060CF9290EAC5A0007D23C /* FirstViewStyling.swift */,
 				36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */,
+				36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */,
 				36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */,
 			);
 			path = ViewDraw;
@@ -200,6 +207,7 @@
 				36060D17290EAE250007D23C /* FirstModel.swift */,
 				36060D46290EE35B0007D23C /* PersonListViewModel.swift */,
 				36D27C2E2911422B00A4A241 /* PersonCellModel.swift */,
+				36D27C382911659C00A4A241 /* PersonSelectionViewModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 			children = (
 				36E70DDA290EA48800305231 /* FirstViewController.swift */,
 				36060D48290EE3D60007D23C /* PersonContentView.swift */,
+				36D27C3C2911696600A4A241 /* PersonSelectionView.swift */,
 				36D27C3229114D7D00A4A241 /* PersonRowCell.swift */,
 				36D27C342911510D00A4A241 /* PersonRowView.swift */,
 			);
@@ -387,10 +396,12 @@
 				36060D35290EB04F0007D23C /* HTTPClient.swift in Sources */,
 				36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */,
 				36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */,
+				36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */,
 				36060D15290EADE50007D23C /* FirstViewControllerRoutable.swift in Sources */,
 				36060D2F290EAFFA0007D23C /* NSCache+Extension.swift in Sources */,
 				36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */,
 				36060D41290EBD060007D23C /* RandomPeopleEntity.swift in Sources */,
+				36D27C3D2911696600A4A241 /* PersonSelectionView.swift in Sources */,
 				36060D2D290EAFD30007D23C /* ParkBenchTimer.swift in Sources */,
 				36060D1C290EAE680007D23C /* SecondModel.swift in Sources */,
 				36D27C352911510D00A4A241 /* PersonRowView.swift in Sources */,
@@ -418,6 +429,7 @@
 				36060D02290EACF10007D23C /* AlertFactory.swift in Sources */,
 				36060D09290EAD500007D23C /* SceneAction.swift in Sources */,
 				36060D31290EB0100007D23C /* Sequence+Extension.swift in Sources */,
+				36D27C392911659C00A4A241 /* PersonSelectionViewModel.swift in Sources */,
 				36D27C3129114C1200A4A241 /* PersonContentViewStyling.swift in Sources */,
 				36060D2B290EAFBA0007D23C /* CacheHandler.swift in Sources */,
 				36060D47290EE35B0007D23C /* PersonListViewModel.swift in Sources */,

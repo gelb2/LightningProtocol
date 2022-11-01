@@ -12,12 +12,15 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     var viewModel: PersonListViewModel
     
     // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
-    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: gridLayout)
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: listLayout)
     
     lazy var listLayout = createListLayout()
     lazy var gridLayout = createGridLayout()
     
-    private let reuseIdentifier = "PersonRowCell"
+    private let rowCellIdentitier = "PersonRowCell"
+    private let gridCellIdentifier = "PersonGridCell"
+    
+    var layoutMode: collectionType = .list
     
     let refreshControl = UIRefreshControl()
     
@@ -124,7 +127,8 @@ extension PersonContentView: Presentable {
     func bind() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: rowCellIdentitier)
+        collectionView.register(PersonGridCell.self, forCellWithReuseIdentifier: gridCellIdentifier)
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
@@ -159,8 +163,10 @@ extension PersonContentView: Presentable {
             print("layout type called \(type)")
             switch type {
             case .list:
+                self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.listLayout, animated: true)
             case .grid:
+                self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.gridLayout, animated: true)
             }
         }
@@ -187,12 +193,21 @@ extension PersonContentView: UICollectionViewDataSource {
     
     // TODO: 컴포지셔널 레이아웃에 따른 셀 디큐 다르게 하기 처리?
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PersonRowCell else {
-            fatalError()
+        
+        switch layoutMode {
+        case .list:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowCellIdentitier, for: indexPath) as? PersonRowCell else { fatalError() }
+            let model = viewModel.dataSource[indexPath.item]
+            cell.configureCell(viewModel: model)
+            print("list cell for row")
+            return cell
+        case .grid:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: gridCellIdentifier, for: indexPath) as? PersonGridCell else { fatalError() }
+            let model = viewModel.dataSource[indexPath.item]
+            cell.configureCell(viewModel: model)
+            print("grid cell for row")
+            return cell
         }
-        let model = viewModel.dataSource[indexPath.item]
-        cell.configureCell(viewModel: model)
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

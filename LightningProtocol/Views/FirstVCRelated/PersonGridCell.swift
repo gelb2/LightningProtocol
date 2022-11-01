@@ -9,7 +9,7 @@ import UIKit
 
 class PersonGridCell: UICollectionViewCell {
     
-    var cellView: PersonRowView = PersonRowView()
+    var cellView: PersonGridView = PersonGridView()
     
     var viewModel = PersonCellModel() {
         didSet {

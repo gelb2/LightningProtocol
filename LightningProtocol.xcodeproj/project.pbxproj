@@ -42,6 +42,8 @@
 		36060D47290EE35B0007D23C /* PersonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D46290EE35B0007D23C /* PersonListViewModel.swift */; };
 		36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D48290EE3D60007D23C /* PersonContentView.swift */; };
 		36AABC1C2911866A004222A0 /* ActivityIndicatorViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AABC1B2911866A004222A0 /* ActivityIndicatorViewStyling.swift */; };
+		36ABB857291198B10051B164 /* ProfileZoomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ABB856291198B10051B164 /* ProfileZoomContentView.swift */; };
+		36ABB8592911990A0051B164 /* ProfileZoomContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ABB8582911990A0051B164 /* ProfileZoomContentViewModel.swift */; };
 		36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C2E2911422B00A4A241 /* PersonCellModel.swift */; };
 		36D27C3129114C1200A4A241 /* PersonContentViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */; };
 		36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3229114D7D00A4A241 /* PersonRowCell.swift */; };
@@ -94,6 +96,8 @@
 		36060D46290EE35B0007D23C /* PersonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListViewModel.swift; sourceTree = "<group>"; };
 		36060D48290EE3D60007D23C /* PersonContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentView.swift; sourceTree = "<group>"; };
 		36AABC1B2911866A004222A0 /* ActivityIndicatorViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewStyling.swift; sourceTree = "<group>"; };
+		36ABB856291198B10051B164 /* ProfileZoomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileZoomContentView.swift; sourceTree = "<group>"; };
+		36ABB8582911990A0051B164 /* ProfileZoomContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileZoomContentViewModel.swift; sourceTree = "<group>"; };
 		36D27C2E2911422B00A4A241 /* PersonCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCellModel.swift; sourceTree = "<group>"; };
 		36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentViewStyling.swift; sourceTree = "<group>"; };
 		36D27C3229114D7D00A4A241 /* PersonRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCell.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				36060D1B290EAE680007D23C /* SecondModel.swift */,
+				36ABB8582911990A0051B164 /* ProfileZoomContentViewModel.swift */,
 			);
 			path = SecondVCRelated;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				36060D23290EAF160007D23C /* SecondViewController.swift */,
+				36ABB856291198B10051B164 /* ProfileZoomContentView.swift */,
 			);
 			path = SecondVCRelated;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */,
 				36AABC1C2911866A004222A0 /* ActivityIndicatorViewStyling.swift in Sources */,
 				36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */,
+				36ABB8592911990A0051B164 /* ProfileZoomContentViewModel.swift in Sources */,
 				36060D15290EADE50007D23C /* FirstViewControllerRoutable.swift in Sources */,
 				36060D2F290EAFFA0007D23C /* NSCache+Extension.swift in Sources */,
 				36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */,
@@ -429,6 +436,7 @@
 				36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */,
 				36060D29290EAF9F0007D23C /* MainThreadActor.swift in Sources */,
 				36060D0F290EADA30007D23C /* SceneCategory.swift in Sources */,
+				36ABB857291198B10051B164 /* ProfileZoomContentView.swift in Sources */,
 				36060D39290EB0720007D23C /* API.swift in Sources */,
 				36060D3D290EB4A50007D23C /* ThirdViewControllerRoutable.swift in Sources */,
 				36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */,

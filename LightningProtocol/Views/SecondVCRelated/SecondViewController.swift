@@ -11,6 +11,8 @@ class SecondViewController: UIViewController {
 
     var model: SecondModel
     
+    lazy var contentView: ProfileZoomContentView = ProfileZoomContentView(viewModel: model.profileZoomContentViewModel)
+    
     init(viewModel: SecondModel) {
         self.model = viewModel
         
@@ -30,7 +32,8 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        model.populateData()
         // Do any additional setup after loading the view.
     }
     
@@ -49,10 +52,24 @@ class SecondViewController: UIViewController {
 
 extension SecondViewController: Presentable {
     func initViewHierarchy() {
+        self.view = UIView()
+        self.view.addSubview(contentView)
         
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraint: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraint) }
+        
+        constraint += [
+            contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ]
     }
     
     func configureView() {
+        view.backgroundColor = .white
         
     }
     

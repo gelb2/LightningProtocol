@@ -41,6 +41,7 @@
 		36060D43290EBFE20007D23C /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D42290EBFE20007D23C /* CachedImageView.swift */; };
 		36060D47290EE35B0007D23C /* PersonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D46290EE35B0007D23C /* PersonListViewModel.swift */; };
 		36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36060D48290EE3D60007D23C /* PersonContentView.swift */; };
+		36AABC1C2911866A004222A0 /* ActivityIndicatorViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AABC1B2911866A004222A0 /* ActivityIndicatorViewStyling.swift */; };
 		36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C2E2911422B00A4A241 /* PersonCellModel.swift */; };
 		36D27C3129114C1200A4A241 /* PersonContentViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */; };
 		36D27C3329114D7D00A4A241 /* PersonRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3229114D7D00A4A241 /* PersonRowCell.swift */; };
@@ -92,6 +93,7 @@
 		36060D42290EBFE20007D23C /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		36060D46290EE35B0007D23C /* PersonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListViewModel.swift; sourceTree = "<group>"; };
 		36060D48290EE3D60007D23C /* PersonContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentView.swift; sourceTree = "<group>"; };
+		36AABC1B2911866A004222A0 /* ActivityIndicatorViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewStyling.swift; sourceTree = "<group>"; };
 		36D27C2E2911422B00A4A241 /* PersonCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCellModel.swift; sourceTree = "<group>"; };
 		36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentViewStyling.swift; sourceTree = "<group>"; };
 		36D27C3229114D7D00A4A241 /* PersonRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRowCell.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				36060CF5290EAC2A0007D23C /* Presentable.swift */,
 				36060CF7290EAC440007D23C /* Styling.swift */,
+				36AABC1B2911866A004222A0 /* ActivityIndicatorViewStyling.swift */,
 				36060CF9290EAC5A0007D23C /* FirstViewStyling.swift */,
 				36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */,
 				36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */,
@@ -400,6 +403,7 @@
 				36060D35290EB04F0007D23C /* HTTPClient.swift in Sources */,
 				36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */,
 				36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */,
+				36AABC1C2911866A004222A0 /* ActivityIndicatorViewStyling.swift in Sources */,
 				36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */,
 				36060D15290EADE50007D23C /* FirstViewControllerRoutable.swift in Sources */,
 				36060D2F290EAFFA0007D23C /* NSCache+Extension.swift in Sources */,

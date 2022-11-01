@@ -68,6 +68,7 @@ class PersonListViewModel {
                 let nextPageIndex = self.pageIndex + 1
                 self.pageIndex = nextPageIndex
                 self.populatePageIndex(nextPageIndex)
+                self.turnOnIndicator?(())
             }
         }
         

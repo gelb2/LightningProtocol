@@ -69,20 +69,27 @@ extension PersonContentView: Presentable {
         collectionView.delegate = self
         collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
         viewModel.didReceiveViewModel = { [weak self] _ in
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
         
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        collectionView.refreshControl = refreshControl
+        viewModel.turnOnRefreshControl = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.refreshControl?.beginRefreshing()
+        }
+        
+        viewModel.turnOffRefreshControl = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.refreshControl?.endRefreshing()
+        }
     }
     
     @objc func refresh() {
-        collectionView.refreshControl?.beginRefreshing()
-        
-        // TODO: stop refreshing
-        collectionView.refreshControl?.endRefreshing()
+        viewModel.didReceiveRefreshEvent()
     }
 }
 

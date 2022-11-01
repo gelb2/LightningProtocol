@@ -10,10 +10,11 @@ import UIKit
 class FirstViewController: UIViewController, FirstViewControllerRoutable {
 
     var model: FirstModel
-    
+    lazy var selectionView: PersonSelectionView = PersonSelectionView(viewModel: self.model.selectionViewModel)
     lazy var manContentView: PersonContentView = PersonContentView(viewModel: self.model.manViewModel)
     lazy var womanContentView: PersonContentView = PersonContentView(viewModel: self.model.womanViewModel)
     
+    // TODO: 스크롤뷰로 별도의 뷰로 만들고, 별도의 뷰모델을 추가해야 할까...?
     var scrollView: UIScrollView = UIScrollView()
     
     init(viewModel: FirstModel) {
@@ -46,10 +47,13 @@ extension FirstViewController: Presentable {
         self.view = UIView()
         navigationItem.title = "목록"
         
+        self.view.addSubview(selectionView)
         self.view.addSubview(scrollView)
+        
         scrollView.addSubview(manContentView)
         scrollView.addSubview(womanContentView)
         
+        selectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -60,7 +64,14 @@ extension FirstViewController: Presentable {
         defer { NSLayoutConstraint.activate(constraint) }
         
         constraint += [
-            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            selectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            selectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            selectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            selectionView.heightAnchor.constraint(equalToConstant: 48)
+        ]
+        
+        constraint += [
+            scrollView.topAnchor.constraint(equalTo: self.selectionView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -97,6 +108,16 @@ extension FirstViewController: Presentable {
         model.routeSubject = { [weak self] sceneCategory in
             guard let self = self else { return }
             self.route(to: sceneCategory)
+        }
+        
+        model.scrollSubject = { [weak self] genderType in
+            guard let self = self else { return }
+            switch genderType {
+            case .male:
+                self.scrollView.scrollToView(view: self.manContentView, animated: true)
+            case .female:
+                self.scrollView.scrollToView(view: self.womanContentView, animated: true)
+            }
         }
     }
 }

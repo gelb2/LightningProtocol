@@ -62,8 +62,8 @@ extension PersonGridView: Presentable {
         constraint += [
             profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            profileImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor)
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
+            profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
         ]
         
         constraint += [

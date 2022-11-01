@@ -165,9 +165,11 @@ extension PersonContentView: Presentable {
             case .list:
                 self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.listLayout, animated: true)
+                // TODO: visibleCell에 레이아웃 수동으로 먹이기?
             case .grid:
                 self.layoutMode = type
                 self.collectionView.setCollectionViewLayout(self.gridLayout, animated: true)
+                // TODO: visibleCell에 레이아웃 수동으로 먹이기?
             }
         }
     }

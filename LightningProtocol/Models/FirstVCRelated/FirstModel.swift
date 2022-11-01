@@ -41,7 +41,40 @@ class FirstModel: SceneActionReceiver {
     }
     
     private func bind() {
-
+        // TODO: viewmodel의 클로저가 호출되면 다시 viewModel의 didReceiveEntity를 또 부르는 구조...개선이 필요해 보인다...
+        privateManViewModel.populatePageIndex = { [weak self] pageIndex in
+            guard let self = self else { return }
+            Task {
+                print("firstModel Page index check : \(pageIndex)")
+                await self.requestAPI_man_NextPage(pageIndex: pageIndex)
+            }
+        }
+        
+        privateWomanViewModel.populatePageIndex = { [weak self] pageIndex in
+            guard let self = self else { return }
+            Task {
+                print("firstModel Page index check : \(pageIndex)")
+                await self.requestAPI_woman_NextPage(pageIndex: pageIndex)
+            }
+        }
+    }
+    
+    private func requestAPI_man_NextPage(pageIndex: Int) async {
+        do {
+            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: "male")))
+            privateManViewModel.didReceiveEntity(manEntity)
+        } catch let error {
+            handleError(error: error)
+        }
+    }
+    
+    private func requestAPI_woman_NextPage(pageIndex: Int) async {
+        do {
+            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: "female")))
+            privateWomanViewModel.didReceiveEntity(manEntity)
+        } catch let error {
+            handleError(error: error)
+        }
     }
     
     private func requestAPI() async {

@@ -52,6 +52,7 @@ extension FirstViewController: Presentable {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
+        
         manContentView.translatesAutoresizingMaskIntoConstraints = false
         womanContentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -59,7 +60,7 @@ extension FirstViewController: Presentable {
         defer { NSLayoutConstraint.activate(constraint) }
         
         constraint += [
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -71,19 +72,25 @@ extension FirstViewController: Presentable {
             manContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             manContentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             manContentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            manContentView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+            manContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            manContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ]
         
         constraint += [
             womanContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             womanContentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             womanContentView.leadingAnchor.constraint(equalTo: manContentView.trailingAnchor),
-            womanContentView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+            womanContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            womanContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            womanContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
         ]
     }
     
     func configureView() {
         view.backgroundColor = .white
+        
+        // TODO: 스크롤뷰 좌우 스크롤 관련해서 더 자연스럽게 처리
+        scrollView.isPagingEnabled = true
     }
     
     func bind() {

@@ -12,8 +12,7 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     var viewModel: PersonListViewModel
     
     // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
-//    private let layout = UICollectionViewFlowLayout()
-    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: listLayout)
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: gridLayout)
     
     lazy var listLayout = createListLayout()
     lazy var gridLayout = createGridLayout()

@@ -14,6 +14,7 @@ extension UIImage {
         case docImage = "doc.text.image"
         case errorImage = "exclamationmark.circle.fill"
         case trashImage = "trash"
+        case pencil_ruler = "pencil.and.ruler"
     }
     
     convenience init?(systemName: ImageName) {

@@ -34,7 +34,9 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
         case .detail(.thirdViewController):
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            nextVC.modalPresentationStyle = .overFullScreen
+            nextVC.modalTransitionStyle = .crossDissolve
+            self.present(nextVC, animated: true)
         default: break
         }
     }

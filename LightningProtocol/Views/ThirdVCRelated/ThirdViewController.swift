@@ -7,9 +7,11 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class ThirdViewController: UIViewController, ThirdViewControllerRoutable {
     
     var model: ThirdModel
+    
+    lazy var contentView = ContentView(viewModel: self.model.contentViewModel)
     
     init(viewModel: ThirdModel) {
         self.model = viewModel
@@ -47,7 +49,22 @@ class ThirdViewController: UIViewController {
 
 extension ThirdViewController: Presentable {
     func initViewHierarchy() {
+        self.view = UIView()
+        self.view.backgroundColor = .clear
         
+        self.view.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        var constraint: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraint) }
+        
+        constraint += [
+            contentView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ]
     }
     
     func configureView() {
@@ -55,7 +72,10 @@ extension ThirdViewController: Presentable {
     }
     
     func bind() {
-        
+        model.routeSubject = { [weak self] sceneCategory in
+            guard let self = self else { return }
+            self.route(to: sceneCategory)
+        }
     }
     
     

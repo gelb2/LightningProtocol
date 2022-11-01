@@ -55,8 +55,13 @@ class PersonListViewModel {
             
             Task {
                 let newData = await self.populateEntity(entity: entity)
-                self.privateDataSource = self.privateDataSource + newData
-                // TODO: 중복되는 데이터 제거
+                // TODO: 중복되는 데이터 제거 고도화 및 재확인
+                newData.forEach { value in
+                    if !self.privateDataSource.contains(value) {
+                        self.privateDataSource.append(value)
+                    }
+                }
+                
                 self.didReceiveViewModel?(())
                 self.turnOffIndicator?(())
             }

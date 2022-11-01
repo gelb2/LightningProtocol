@@ -16,6 +16,8 @@ class PersonContentView: UIView, PersonContentViewStyling {
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private let reuseIdentifier = "PersonRowCell"
     
+    let refreshControl = UIRefreshControl()
+    
     init(viewModel: PersonListViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -71,9 +73,17 @@ extension PersonContentView: Presentable {
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
-    
+    @objc func refresh() {
+        collectionView.refreshControl?.beginRefreshing()
+        
+        // TODO: stop refreshing
+        collectionView.refreshControl?.endRefreshing()
+    }
 }
 
 extension PersonContentView: UICollectionViewDelegate {

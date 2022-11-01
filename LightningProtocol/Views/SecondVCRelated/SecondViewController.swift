@@ -70,7 +70,7 @@ extension SecondViewController: Presentable {
     
     func configureView() {
         view.backgroundColor = .white
-        
+        navigationItem.title = "프로필이미지"
     }
     
     func bind() {

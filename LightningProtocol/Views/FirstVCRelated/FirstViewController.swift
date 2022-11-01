@@ -45,7 +45,6 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
 extension FirstViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
-        navigationItem.title = "목록"
         
         self.view.addSubview(selectionView)
         self.view.addSubview(scrollView)
@@ -100,6 +99,7 @@ extension FirstViewController: Presentable {
     func configureView() {
         view.backgroundColor = .white
         
+        navigationItem.title = "목록"
         // TODO: 스크롤뷰 좌우 스크롤 관련해서 더 자연스럽게 처리
         scrollView.isPagingEnabled = true
     }

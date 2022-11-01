@@ -15,6 +15,8 @@ class PersonListViewModel {
     var didReceiveIndexPathItem: (Int) -> () = { item in }
     var didReceiveRefreshEvent: () -> () = { }
     
+    var didSelectItem: (Int) -> () = { indexPathItem in }
+    
     //output
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
     @MainThreadActor var turnOnIndicator: ( ((Void)) -> () )?
@@ -24,6 +26,8 @@ class PersonListViewModel {
     
     var populatePageIndex: (Int) -> () = { item in }
     var populateRefreshEvent: () -> () = { }
+    
+    var propergateLargeImageURLString: (String) -> () = { largeImageURLString in }
     
     var dataSource: [PersonCellModel] {
         return privateDataSource
@@ -82,6 +86,12 @@ class PersonListViewModel {
             self.turnOnRefreshControl?(())
             self.populateRefreshEvent()
         }
+        
+        didSelectItem = { [weak self] indexPathItem in
+            guard let self = self else { return }
+            let imageURL = self.findLargeImageURLString(indexPathItem)
+            self.propergateLargeImageURLString(imageURL)
+        }
     }
     
     private func populateEntity(entity: RandomPeopleEntity) async -> [PersonCellModel] {
@@ -98,6 +108,11 @@ class PersonListViewModel {
             return cellModel
         }
         return newData
+    }
+    
+    private func findLargeImageURLString(_ indexPathItem: Int) -> String {
+        let imageURL = privateDataSource[indexPathItem].largeImageURLString
+        return imageURL
     }
     
 }

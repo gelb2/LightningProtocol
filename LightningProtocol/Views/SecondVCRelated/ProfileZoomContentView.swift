@@ -72,6 +72,7 @@ extension ProfileZoomContentView: Presentable {
         
         viewModel.loadImage = { [weak self] urlString in
             guard let self = self else { return }
+            print("large image url check: \(urlString)")
             self.imageView.loadImage(urlString: urlString)
         }
     }

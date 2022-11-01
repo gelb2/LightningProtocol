@@ -7,13 +7,18 @@
 
 import Foundation
 
+enum GenderType: String {
+    case male
+    case female
+}
+
 enum API {
     
     case randomUser(userType)
     
     enum userType {
-        case man(resultCount: Int, pageIndex: Int, gender: String)
-        case woman(resultCount: Int, pageIndex: Int, gender: String)
+        case man(resultCount: Int, pageIndex: Int, gender: GenderType)
+        case woman(resultCount: Int, pageIndex: Int, gender: GenderType)
     }
     
     var urlComponets: URLComponents? {
@@ -46,12 +51,12 @@ enum API {
         case .randomUser(.man(let resultCount, let pageIndex, let gender)):
             let resultCount = [URLQueryItem(name: "results", value: "\(resultCount)")]
             let pageIndex = [URLQueryItem(name: "page", value: "\(pageIndex)")]
-            let gender = [URLQueryItem(name: "gender", value: gender)]
+            let gender = [URLQueryItem(name: "gender", value: gender.rawValue)]
             return resultCount + pageIndex + gender
         case .randomUser(.woman(let resultCount, let pageIndex, let gender)):
             let resultCount = [URLQueryItem(name: "results", value: "\(resultCount)")]
             let pageIndex = [URLQueryItem(name: "page", value: "\(pageIndex)")]
-            let gender = [URLQueryItem(name: "gender", value: gender)]
+            let gender = [URLQueryItem(name: "gender", value: gender.rawValue)]
             return resultCount + pageIndex + gender
         
         }

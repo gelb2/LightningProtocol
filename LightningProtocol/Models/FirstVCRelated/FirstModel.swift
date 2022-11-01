@@ -61,7 +61,7 @@ class FirstModel: SceneActionReceiver {
     
     private func requestAPI_man_NextPage(pageIndex: Int) async {
         do {
-            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: "male")))
+            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: .male)))
             privateManViewModel.didReceiveEntity(manEntity)
         } catch let error {
             handleError(error: error)
@@ -70,7 +70,7 @@ class FirstModel: SceneActionReceiver {
     
     private func requestAPI_woman_NextPage(pageIndex: Int) async {
         do {
-            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: "female")))
+            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: pageIndex, gender: .female)))
             privateWomanViewModel.didReceiveEntity(manEntity)
         } catch let error {
             handleError(error: error)
@@ -83,8 +83,8 @@ class FirstModel: SceneActionReceiver {
         do {
             // TODO: add pageIndex, resultCount for man woman view
             // TODO: TaskGroup 이용한 동시성 처리 == 동시에 두 api 다 부르게 추가 수정
-            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: 1, gender: "male")))
-            let womanEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.woman(resultCount: 10, pageIndex: 1, gender: "female")))
+            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: 1, gender: .male)))
+            let womanEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.woman(resultCount: 10, pageIndex: 1, gender: .female)))
             
             privateManViewModel.didReceiveEntity(manEntity)
             privateWomanViewModel.didReceiveEntity(womanEntity)

@@ -114,7 +114,10 @@ extension PersonContentView: Presentable {
 }
 
 extension PersonContentView: UICollectionViewDelegate {
-    
+    // TODO: 사진 선택시 뷰모델이 해당 클로저 호출하도록 추가 수정
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.didSelectItem(indexPath.item)
+    }
 }
 
 extension PersonContentView: UICollectionViewDataSource {

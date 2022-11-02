@@ -11,7 +11,6 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
 
     var viewModel: PersonListViewModel
     
-    // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: createListLayout())
     
     var listLayout: UICollectionViewCompositionalLayout?
@@ -177,7 +176,7 @@ extension PersonContentView: Presentable {
 
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
-                self.collectionView.reloadData() //실제 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
+                self.collectionView.reloadData() //실제 비즈니스 용으로 되는 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
                 //visibleCell을 어떻게 처리하는 거 같다...
                 self.layoutMode = type //여기로 옮기니 된다고...왜지...
             case .grid:
@@ -186,16 +185,10 @@ extension PersonContentView: Presentable {
                 guard let gridLayout = self.gridLayout else { return }
                 
                 self.collectionView.setCollectionViewLayout(gridLayout, animated: false)
-//
-//                for cell in self.collectionView.visibleCells {
-//                    let indexPath = self.collectionView.indexPath(for: cell)
-//                    collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
-//                }
-//
+
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
-                self.collectionView.reloadData() //실제 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
-                //visibleCell을 어떻게 처리하는 거 같다...
+                self.collectionView.reloadData() //실제 비즈니스 용으로 되는 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
                 self.layoutMode = type //여기로 옮기니 된다고...왜지...
             }
         }

@@ -100,9 +100,9 @@ extension FirstViewController: Presentable {
         ]
         
         constraint += [
-            layoutSelectionView.widthAnchor.constraint(equalToConstant: 80),
-            layoutSelectionView.heightAnchor.constraint(equalToConstant: 80),
-            layoutSelectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            layoutSelectionView.widthAnchor.constraint(equalToConstant: 40),
+            layoutSelectionView.heightAnchor.constraint(equalToConstant: 40),
+            layoutSelectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
             layoutSelectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
         ]
     }

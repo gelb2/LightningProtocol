@@ -172,8 +172,8 @@ extension PersonContentView: Presentable {
                 self.layoutMode = type
                 
                 guard let listLayout = self.listLayout else { return }
-                
-                self.collectionView.setCollectionViewLayout(listLayout, animated: true)
+                //애니메이션을 끄니까 된다고...왜지...
+                self.collectionView.setCollectionViewLayout(listLayout, animated: false)
 
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
@@ -184,8 +184,13 @@ extension PersonContentView: Presentable {
                 
                 guard let gridLayout = self.gridLayout else { return }
                 
-                self.collectionView.setCollectionViewLayout(gridLayout, animated: true)
-                
+                self.collectionView.setCollectionViewLayout(gridLayout, animated: false)
+//
+//                for cell in self.collectionView.visibleCells {
+//                    let indexPath = self.collectionView.indexPath(for: cell)
+//                    collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+//                }
+//
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
                 self.collectionView.reloadData() //실제 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...

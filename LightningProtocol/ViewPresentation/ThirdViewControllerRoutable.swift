@@ -24,11 +24,26 @@ extension ThirdViewControllerRoutable where Self: ThirdViewController {
     func route(to Scene: SceneCategory) {
         switch Scene {
         case .close:
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
+        case .main(.firstViewControllerWithAction):
+            sendAction(scene: Scene)
+            self.dismiss(animated: true)
         case .alert:
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }
             present(nextVC, animated: true)
+        default: break
+        }
+    }
+    
+    func sendAction(scene: SceneCategory) {
+        switch scene {
+        case .main(.firstViewControllerWithAction(let context)):
+            guard let presentingNavi = self.presentingViewController as? UINavigationController else { return }
+            guard let firstVC = presentingNavi.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
+            let action = context.dependency
+            firstVC.model.didReceiveSceneAction(action)
+            break
         default: break
         }
     }

@@ -16,9 +16,6 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
         switch Scene {
         case .close:
             self.dismiss(animated: true)
-        case .closeWithAction(let scene):
-            sendAction(scene: scene)
-            self.navigationController?.popViewController(animated: true)
         case .alert:
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }

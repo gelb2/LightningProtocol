@@ -14,6 +14,8 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
     lazy var manContentView: PersonContentView = PersonContentView(viewModel: self.model.manViewModel)
     lazy var womanContentView: PersonContentView = PersonContentView(viewModel: self.model.womanViewModel)
     
+    lazy var layoutSelectionView: LayoutSelectionView = LayoutSelectionView(viewModel: self.model.layoutSelectionViewModel)
+    
     // TODO: 스크롤뷰로 별도의 뷰로 만들고, 별도의 뷰모델을 추가해야 할까...?
     var scrollView: UIScrollView = UIScrollView()
     
@@ -34,7 +36,6 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("first vc viewDidLoad")
         model.populateData()
         // Do any additional setup after loading the view.
     }
@@ -52,12 +53,15 @@ extension FirstViewController: Presentable {
         scrollView.addSubview(manContentView)
         scrollView.addSubview(womanContentView)
         
+        self.view.addSubview(layoutSelectionView)
+        
         selectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        
         manContentView.translatesAutoresizingMaskIntoConstraints = false
         womanContentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        layoutSelectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
@@ -93,6 +97,13 @@ extension FirstViewController: Presentable {
             womanContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             womanContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             womanContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+        ]
+        
+        constraint += [
+            layoutSelectionView.widthAnchor.constraint(equalToConstant: 80),
+            layoutSelectionView.heightAnchor.constraint(equalToConstant: 80),
+            layoutSelectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            layoutSelectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
         ]
     }
     

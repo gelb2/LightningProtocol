@@ -1,15 +1,15 @@
 //
-//  PersonRowCell.swift
+//  PersonGridCell.swift
 //  LightningProtocol
 //
-//  Created by pablo.jee on 2022/11/01.
+//  Created by pablo.jee on 2022/11/02.
 //
 
 import UIKit
 
-class PersonRowCell: UICollectionViewCell {
+class PersonGridCell: UICollectionViewCell {
     
-    var cellView: PersonRowView = PersonRowView()
+    var cellView: PersonGridView = PersonGridView()
     
     var viewModel = PersonCellModel() {
         didSet {
@@ -29,7 +29,7 @@ class PersonRowCell: UICollectionViewCell {
     }
 }
 
-extension PersonRowCell: Presentable {
+extension PersonGridCell: Presentable {
     func initViewHierarchy() {
         self.addSubview(cellView)
         cellView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,3 +57,4 @@ extension PersonRowCell: Presentable {
         self.viewModel = viewModel
     }
 }
+

@@ -1,14 +1,14 @@
 //
-//  PersonRowView.swift
+//  PersonGridView.swift
 //  LightningProtocol
 //
-//  Created by pablo.jee on 2022/11/01.
+//  Created by pablo.jee on 2022/11/02.
 //
 
 import UIKit
 import SwiftUI
 
-class PersonRowView: UIView, PersonRowCellStyling {
+class PersonGridView: UIView, PersonGridCellStyling {
     
     //input
     var didReceiveViewModel: (PersonCellModel) -> () = { model in}
@@ -38,7 +38,7 @@ class PersonRowView: UIView, PersonRowCellStyling {
     
 }
 
-extension PersonRowView: Presentable {
+extension PersonGridView: Presentable {
     func initViewHierarchy() {
         
         self.addSubview(profileImageView)
@@ -62,12 +62,12 @@ extension PersonRowView: Presentable {
         constraint += [
             profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
             profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
         ]
         
         constraint += [
-            verticalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            verticalStackView.topAnchor.constraint(equalTo: self.profileImageView.bottomAnchor, constant: 8),
             verticalStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
             verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
@@ -101,7 +101,7 @@ extension PersonRowView: Presentable {
 }
 
 #if canImport(SwiftUI) && DEBUG
-struct PersonRowViewPreview<View: UIView>: UIViewRepresentable {
+struct PersonGridViewPreview<View: UIView>: UIViewRepresentable {
     let view: View
     
     init(_ builder: @escaping () -> View) {
@@ -121,12 +121,12 @@ struct PersonRowViewPreview<View: UIView>: UIViewRepresentable {
 #endif
 
 #if canImport(SwiftUI) && DEBUG
-struct PersonRowViewPreviewProvider: PreviewProvider {
+struct PersonGridViewPreviewProvider: PreviewProvider {
     static var previews: some View {
-        PersonRowViewPreview {
-            let view = PersonRowView()
+        PersonGridViewPreview {
+            let view = PersonGridView()
             return view
-        }.previewLayout(.fixed(width: 390, height: 100))
+        }.previewLayout(.fixed(width: 160, height: 160))
     }
 }
 

@@ -29,12 +29,18 @@ class FirstModel: SceneActionReceiver {
         return privateWomanViewModel
     }
     
+    var layoutSelectionViewModel: LayoutSelectionViewModel {
+        return privateLayoutSelectionViewModel
+    }
+    
     //properties
     private var repository: RepositoryProtocol
     
     private var privateSelectionViewModel: PersonSelectionViewModel = PersonSelectionViewModel()
     private var privateManViewModel: PersonListViewModel = PersonListViewModel()
     private var privateWomanViewModel: PersonListViewModel = PersonListViewModel()
+    
+    private var privateLayoutSelectionViewModel: LayoutSelectionViewModel = LayoutSelectionViewModel()
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
@@ -98,6 +104,26 @@ class FirstModel: SceneActionReceiver {
             secondModel.largeImageURLString = urlString
             let context = SceneContext(dependency: secondModel)
             self.routeSubject?(.detail(.secondViewController(context: context)))
+        }
+        
+        privateLayoutSelectionViewModel.populateTapEvent = { [weak self] in
+            guard let self = self else { return }
+            let thirdModel = ThirdModel()
+            let context = SceneContext(dependency: thirdModel)
+            self.routeSubject?(.detail(.thirdViewController(context: context)))
+        }
+        
+        didReceiveSceneAction = { [weak self] action in
+            guard let self else { return }
+            guard let action = action as? FirstSceneAction else { return }
+            
+            switch action {
+            case .refresh:
+                break
+            case .refreshWithCollectionLayout(let layout):
+                self.manViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
+                self.womanViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
+            }
         }
     }
     

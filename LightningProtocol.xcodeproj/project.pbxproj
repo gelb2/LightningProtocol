@@ -53,6 +53,16 @@
 		36D27C3D2911696600A4A241 /* PersonSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3C2911696600A4A241 /* PersonSelectionView.swift */; };
 		36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */; };
 		36D27C412911751400A4A241 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D27C402911751400A4A241 /* UIScrollView+Extension.swift */; };
+		36D5A5D12911C14900A564A3 /* PersonGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5D02911C14900A564A3 /* PersonGridCell.swift */; };
+		36D5A5D32911C17300A564A3 /* PersonGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5D22911C17300A564A3 /* PersonGridView.swift */; };
+		36D5A5D52911C21300A564A3 /* PersonGridCellStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5D42911C21300A564A3 /* PersonGridCellStyling.swift */; };
+		36D5A5D72911C4C200A564A3 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5D62911C4C200A564A3 /* PopupView.swift */; };
+		36D5A5D92911C4F600A564A3 /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5D82911C4F600A564A3 /* PopupViewModel.swift */; };
+		36D5A5DB2911C6B500A564A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5DA2911C6B500A564A3 /* ContentView.swift */; };
+		36D5A5DD2911C70700A564A3 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5DC2911C70700A564A3 /* ContentViewModel.swift */; };
+		36D5A5DF2911C8F800A564A3 /* LayoutSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5DE2911C8F800A564A3 /* LayoutSelectionView.swift */; };
+		36D5A5E12911C90B00A564A3 /* LayoutSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5E02911C90B00A564A3 /* LayoutSelectionViewModel.swift */; };
+		36D5A5E32911C99700A564A3 /* LayoutSelectionViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5A5E22911C99700A564A3 /* LayoutSelectionViewStyling.swift */; };
 		36E70DD7290EA48800305231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD6290EA48800305231 /* AppDelegate.swift */; };
 		36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DD8290EA48800305231 /* SceneDelegate.swift */; };
 		36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E70DDA290EA48800305231 /* FirstViewController.swift */; };
@@ -107,6 +117,16 @@
 		36D27C3C2911696600A4A241 /* PersonSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectionView.swift; sourceTree = "<group>"; };
 		36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSelectionViewStyling.swift; sourceTree = "<group>"; };
 		36D27C402911751400A4A241 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		36D5A5D02911C14900A564A3 /* PersonGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonGridCell.swift; sourceTree = "<group>"; };
+		36D5A5D22911C17300A564A3 /* PersonGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonGridView.swift; sourceTree = "<group>"; };
+		36D5A5D42911C21300A564A3 /* PersonGridCellStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonGridCellStyling.swift; sourceTree = "<group>"; };
+		36D5A5D62911C4C200A564A3 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		36D5A5D82911C4F600A564A3 /* PopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModel.swift; sourceTree = "<group>"; };
+		36D5A5DA2911C6B500A564A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		36D5A5DC2911C70700A564A3 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		36D5A5DE2911C8F800A564A3 /* LayoutSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSelectionView.swift; sourceTree = "<group>"; };
+		36D5A5E02911C90B00A564A3 /* LayoutSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSelectionViewModel.swift; sourceTree = "<group>"; };
+		36D5A5E22911C99700A564A3 /* LayoutSelectionViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSelectionViewStyling.swift; sourceTree = "<group>"; };
 		36E70DD3290EA48800305231 /* LightningProtocol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightningProtocol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E70DD6290EA48800305231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36E70DD8290EA48800305231 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +157,8 @@
 				36D27C3029114C1200A4A241 /* PersonContentViewStyling.swift */,
 				36D27C3E29116A7200A4A241 /* PersonSelectionViewStyling.swift */,
 				36D27C362911566F00A4A241 /* PersonRowCellStyling.swift */,
+				36D5A5D42911C21300A564A3 /* PersonGridCellStyling.swift */,
+				36D5A5E22911C99700A564A3 /* LayoutSelectionViewStyling.swift */,
 			);
 			path = ViewDraw;
 			sourceTree = "<group>";
@@ -218,6 +240,7 @@
 				36060D46290EE35B0007D23C /* PersonListViewModel.swift */,
 				36D27C2E2911422B00A4A241 /* PersonCellModel.swift */,
 				36D27C382911659C00A4A241 /* PersonSelectionViewModel.swift */,
+				36D5A5E02911C90B00A564A3 /* LayoutSelectionViewModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -235,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				36060D1E290EAE7D0007D23C /* ThirdModel.swift */,
+				36D5A5DC2911C70700A564A3 /* ContentViewModel.swift */,
+				36D5A5D82911C4F600A564A3 /* PopupViewModel.swift */,
 			);
 			path = ThirdVCRelated;
 			sourceTree = "<group>";
@@ -255,8 +280,11 @@
 				36E70DDA290EA48800305231 /* FirstViewController.swift */,
 				36060D48290EE3D60007D23C /* PersonContentView.swift */,
 				36D27C3C2911696600A4A241 /* PersonSelectionView.swift */,
+				36D5A5DE2911C8F800A564A3 /* LayoutSelectionView.swift */,
 				36D27C3229114D7D00A4A241 /* PersonRowCell.swift */,
 				36D27C342911510D00A4A241 /* PersonRowView.swift */,
+				36D5A5D02911C14900A564A3 /* PersonGridCell.swift */,
+				36D5A5D22911C17300A564A3 /* PersonGridView.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -274,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				36060D26290EAF2C0007D23C /* ThirdViewController.swift */,
+				36D5A5DA2911C6B500A564A3 /* ContentView.swift */,
+				36D5A5D62911C4C200A564A3 /* PopupView.swift */,
 			);
 			path = ThirdVCRelated;
 			sourceTree = "<group>";
@@ -401,24 +431,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				36060D05290EAD1C0007D23C /* BasicNavigationController.swift in Sources */,
+				36D5A5DB2911C6B500A564A3 /* ContentView.swift in Sources */,
+				36D5A5D92911C4F600A564A3 /* PopupViewModel.swift in Sources */,
 				36060D0B290EAD640007D23C /* FirstSceneAction.swift in Sources */,
 				36060CFD290EAC870007D23C /* UIColor+Extension.swift in Sources */,
 				36060CF8290EAC440007D23C /* Styling.swift in Sources */,
+				36D5A5D32911C17300A564A3 /* PersonGridView.swift in Sources */,
 				36060D11290EADB60007D23C /* Routable.swift in Sources */,
 				36D27C412911751400A4A241 /* UIScrollView+Extension.swift in Sources */,
+				36D5A5D72911C4C200A564A3 /* PopupView.swift in Sources */,
 				36060D35290EB04F0007D23C /* HTTPClient.swift in Sources */,
 				36060D49290EE3D60007D23C /* PersonContentView.swift in Sources */,
 				36E70DDB290EA48800305231 /* FirstViewController.swift in Sources */,
 				36AABC1C2911866A004222A0 /* ActivityIndicatorViewStyling.swift in Sources */,
 				36D27C3F29116A7200A4A241 /* PersonSelectionViewStyling.swift in Sources */,
 				36ABB8592911990A0051B164 /* ProfileZoomContentViewModel.swift in Sources */,
+				36D5A5D12911C14900A564A3 /* PersonGridCell.swift in Sources */,
 				36060D15290EADE50007D23C /* FirstViewControllerRoutable.swift in Sources */,
+				36D5A5E32911C99700A564A3 /* LayoutSelectionViewStyling.swift in Sources */,
 				36060D2F290EAFFA0007D23C /* NSCache+Extension.swift in Sources */,
 				36D27C2F2911422B00A4A241 /* PersonCellModel.swift in Sources */,
 				36060D41290EBD060007D23C /* RandomPeopleEntity.swift in Sources */,
 				36D27C3D2911696600A4A241 /* PersonSelectionView.swift in Sources */,
 				36060D2D290EAFD30007D23C /* ParkBenchTimer.swift in Sources */,
+				36D5A5DF2911C8F800A564A3 /* LayoutSelectionView.swift in Sources */,
 				36060D1C290EAE680007D23C /* SecondModel.swift in Sources */,
+				36D5A5DD2911C70700A564A3 /* ContentViewModel.swift in Sources */,
+				36D5A5D52911C21300A564A3 /* PersonGridCellStyling.swift in Sources */,
 				36D27C352911510D00A4A241 /* PersonRowView.swift in Sources */,
 				36060D27290EAF2C0007D23C /* ThirdViewController.swift in Sources */,
 				36D27C372911566F00A4A241 /* PersonRowCellStyling.swift in Sources */,
@@ -437,6 +476,7 @@
 				36060D29290EAF9F0007D23C /* MainThreadActor.swift in Sources */,
 				36060D0F290EADA30007D23C /* SceneCategory.swift in Sources */,
 				36ABB857291198B10051B164 /* ProfileZoomContentView.swift in Sources */,
+				36D5A5E12911C90B00A564A3 /* LayoutSelectionViewModel.swift in Sources */,
 				36060D39290EB0720007D23C /* API.swift in Sources */,
 				36060D3D290EB4A50007D23C /* ThirdViewControllerRoutable.swift in Sources */,
 				36E70DD9290EA48800305231 /* SceneDelegate.swift in Sources */,

@@ -202,8 +202,10 @@ extension PersonContentView: Presentable {
 
 extension PersonContentView: UICollectionViewDelegate {
     // TODO: 사진 선택시 뷰모델이 해당 클로저 호출하도록 추가 수정
+    //didSelectItem, cell이 선택 정보를 저장할거라고 믿지 말고 독자적으로 구현하기?
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.didSelectItem(indexPath.item)
+        viewModel.didSelectItem(indexPath.item)
+        
         print("collectionView : \(collectionView.indexPathsForSelectedItems)")
         
     }

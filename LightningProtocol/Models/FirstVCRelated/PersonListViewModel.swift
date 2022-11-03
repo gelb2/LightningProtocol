@@ -93,8 +93,12 @@ class PersonListViewModel {
         
         didSelectItem = { [weak self] indexPathItem in
             guard let self = self else { return }
-            let imageURL = self.findLargeImageURLString(indexPathItem)
-            self.propergateLargeImageURLString(imageURL)
+//            let imageURL = self.findLargeImageURLString(indexPathItem)
+//            self.propergateLargeImageURLString(imageURL)
+            
+            self.findAndMarkSelectedItem(indexPathItem)
+            
+            
         }
         
         didReceiveRefreshCollectionLayoutEvent = { [weak self] type in
@@ -117,6 +121,11 @@ class PersonListViewModel {
             return cellModel
         }
         return newData
+    }
+    
+    private func findAndMarkSelectedItem(_ indexPathItem: Int) {
+        let isSelected = privateDataSource[indexPathItem].isSelected
+        privateDataSource[indexPathItem].didReceiveSelectedEvent(!isSelected)
     }
     
     private func findLargeImageURLString(_ indexPathItem: Int) -> String {

@@ -121,6 +121,7 @@ class PersonListViewModel {
             cellModel.location = result.location.country + " / " + result.location.state + " / " + result.location.city
             cellModel.email = result.email
             cellModel.uuid = result.login.uuid
+            cellModel.mobilePhone = result.cell
             cellModel.thumbImageURLString = result.picture.thumbnail
             cellModel.mediumImageURLString = result.picture.medium
             cellModel.largeImageURLString = result.picture.large

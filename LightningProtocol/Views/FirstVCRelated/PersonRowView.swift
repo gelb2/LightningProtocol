@@ -94,6 +94,10 @@ extension PersonRowView: Presentable {
         
         verticalStackView.addStyles(style: cellVerticalStackViewStyling)
         checkImageView.addStyles(style: cellCheckImageViewStyling)
+        
+        nameLabel.addStyles(style: cellNameLabelStyling)
+        locationLabel.addStyles(style: cellLocationLabelStyling)
+        emailLabel.addStyles(style: cellEmailLabelStyling)
     }
     
     func bind() {
@@ -111,7 +115,6 @@ extension PersonRowView: Presentable {
         
         toggleUIAsSelectedEvent = { [weak self] isSelected in
             guard let self = self else { return }
-            print("rowView toggle isSelected \(isSelected)")
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }

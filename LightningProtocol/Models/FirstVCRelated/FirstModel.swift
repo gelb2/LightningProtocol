@@ -202,6 +202,7 @@ class FirstModel: SceneActionReceiver {
             print("ok Action called")
             self.privateManViewModel.didReceiveTrashItemEvent()
             self.privateWomanViewModel.didReceiveTrashItemEvent()
+            self.validateTrashItemButtonShow()
         }
         
         let cancelAction = AlertActionDependency(title: "cancel", style: .cancel, action: nil)

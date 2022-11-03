@@ -17,6 +17,7 @@ class PersonRowView: UIView, PersonRowCellStyling {
     var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
+    var myTapGesture = UITapGestureRecognizer()
     
     var nameLabel: UILabel = UILabel()
     var locationLabel: UILabel = UILabel()
@@ -117,9 +118,16 @@ extension PersonRowView: Presentable {
             guard let self = self else { return }
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
+        
+        myTapGesture.numberOfTapsRequired = 1
+        myTapGesture.addTarget(self, action: #selector(tapMethod))
+        profileImageView.addGestureRecognizer(myTapGesture)
+        profileImageView.isUserInteractionEnabled = true
     }
     
     @objc func tapMethod() {
+        print("tap check")
+        privateCellViewModel.didReceiveProfileTapEvent()
     }
     
     

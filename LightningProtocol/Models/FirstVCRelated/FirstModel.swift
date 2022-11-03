@@ -112,6 +112,22 @@ class FirstModel: SceneActionReceiver {
             self.validateTrashItemButtonShow()
         }
         
+        privateManViewModel.propergateProfileTapEvent = { [weak self] urlString in
+            guard let self = self else { return }
+            let secondModel = SecondModel()
+            secondModel.largeImageURLString = urlString
+            let context = SceneContext(dependency: secondModel)
+            self.routeSubject?(.detail(.secondViewController(context: context)))
+        }
+        
+        privateWomanViewModel.propergateProfileTapEvent = { [weak self] urlString in
+            guard let self = self else { return }
+            let secondModel = SecondModel()
+            secondModel.largeImageURLString = urlString
+            let context = SceneContext(dependency: secondModel)
+            self.routeSubject?(.detail(.secondViewController(context: context)))
+        }
+        
         privateManViewModel.propergateLargeImageURLString = { [weak self] urlString in
             guard let self = self else { return }
             let secondModel = SecondModel()

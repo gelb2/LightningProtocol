@@ -126,7 +126,6 @@ extension PersonRowView: Presentable {
     }
     
     @objc func tapMethod() {
-        print("tap check")
         privateCellViewModel.didReceiveProfileTapEvent()
     }
     

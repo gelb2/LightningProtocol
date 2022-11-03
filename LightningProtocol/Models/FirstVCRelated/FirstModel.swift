@@ -206,7 +206,6 @@ class FirstModel: SceneActionReceiver {
     private func showTrashItemConfirmAlert() {
         let okAction = AlertActionDependency(title: "ok", style: .default) { [weak self] action in
             guard let self = self else { return }
-            print("ok Action called")
             self.privateManViewModel.didReceiveTrashItemEvent()
             self.privateWomanViewModel.didReceiveTrashItemEvent()
             self.validateTrashItemButtonShow()

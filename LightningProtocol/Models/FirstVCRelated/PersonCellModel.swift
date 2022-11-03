@@ -46,15 +46,12 @@ class PersonCellModel {
     func bind() {
         didReceiveSelectedEvent = { [weak self] value in
             guard let self = self else { return }
-            print("cellModel isSelected : \(value)")
             self.isSelected = value
-            print("cellModel isSelected : -> \(self.isSelected)")
             self.toggleUIAsSelectedEvent(self.isSelected)
         }
         
         didReceiveProfileTapEvent = { [weak self] in
             guard let self = self else { return }
-            print("cellModel tapEvent")
             self.propergateProfileTapEvent(self.largeImageURLString)
         }
     }

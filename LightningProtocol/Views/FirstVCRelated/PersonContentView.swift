@@ -135,7 +135,6 @@ extension PersonContentView: Presentable {
         collectionView.delegate = self
         collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: rowCellIdentitier)
         collectionView.register(PersonGridCell.self, forCellWithReuseIdentifier: gridCellIdentifier)
-        collectionView.allowsMultipleSelection = true
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl

@@ -11,7 +11,6 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
 
     var viewModel: PersonListViewModel
     
-    // TODO: 콜렉션뷰 컴포지셔널 레이아웃 도입 후 레이아웃 1단, 2단 변경 요구사항 구현 추가
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: createListLayout())
     
     var listLayout: UICollectionViewCompositionalLayout?
@@ -145,6 +144,11 @@ extension PersonContentView: Presentable {
             self.collectionView.reloadData()
         }
         
+        viewModel.didReceiveSomeItemTrashed = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+        }
+        
         viewModel.turnOnRefreshControl = { [weak self] _ in
             guard let self = self else { return }
             self.collectionView.refreshControl?.beginRefreshing()
@@ -177,7 +181,7 @@ extension PersonContentView: Presentable {
 
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
-                self.collectionView.reloadData() //실제 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
+                self.collectionView.reloadData() //실제 비즈니스 용으로 되는 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
                 //visibleCell을 어떻게 처리하는 거 같다...
                 self.layoutMode = type //여기로 옮기니 된다고...왜지...
             case .grid:
@@ -186,16 +190,10 @@ extension PersonContentView: Presentable {
                 guard let gridLayout = self.gridLayout else { return }
                 
                 self.collectionView.setCollectionViewLayout(gridLayout, animated: false)
-//
-//                for cell in self.collectionView.visibleCells {
-//                    let indexPath = self.collectionView.indexPath(for: cell)
-//                    collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
-//                }
-//
+
                 // TODO: visibleCell에 레이아웃 수동으로 먹이기?
 //                self.layoutIfNeeded() //갑자기 인디케이터가 보였다 사라진다...뭔가 관계가 있을까...
-                self.collectionView.reloadData() //실제 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
-                //visibleCell을 어떻게 처리하는 거 같다...
+                self.collectionView.reloadData() //실제 비즈니스 용으로 되는 앱에서 셀 이미지가 깜박이는거 보면 리로드데이터를 부른거 같긴 한데...
                 self.layoutMode = type //여기로 옮기니 된다고...왜지...
             }
         }
@@ -208,8 +206,12 @@ extension PersonContentView: Presentable {
 
 extension PersonContentView: UICollectionViewDelegate {
     // TODO: 사진 선택시 뷰모델이 해당 클로저 호출하도록 추가 수정
+    //didSelectItem, cell이 선택 정보를 저장할거라고 믿지 말고 독자적으로 구현하기?
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.didSelectItem(indexPath.item)
+        
+        print("collectionView : \(collectionView.indexPathsForSelectedItems)")
+        
     }
 }
 
@@ -221,7 +223,6 @@ extension PersonContentView: UICollectionViewDataSource {
     
     // TODO: 컴포지셔널 레이아웃에 따른 셀 디큐 다르게 하기 처리?
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cell for item check")
         switch layoutMode {
         case .list:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowCellIdentitier, for: indexPath) as? PersonRowCell else { fatalError() }
@@ -237,11 +238,9 @@ extension PersonContentView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("didEnd display check")
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("will display check")
         viewModel.didReceiveIndexPathItem(indexPath.item)
     }
     

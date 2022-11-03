@@ -11,6 +11,13 @@ import UIKit
 protocol FirstViewStyling: Styleable { }
 
 extension FirstViewStyling {
+    var trashButtonStyling: (UIBarButtonItem) -> () {
+        {
+            $0.image = UIImage(systemName: .trashImage)
+            $0.tintColor = .black
+        }
+    }
+    
     var cellTimeLabelStyling: (UILabel) -> () {
         {
             $0.textColor = .graySecondary

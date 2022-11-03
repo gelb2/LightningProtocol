@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FirstViewControllerRoutable {
+class FirstViewController: UIViewController, FirstViewControllerRoutable, FirstViewStyling {
 
     var model: FirstModel
     lazy var selectionView: PersonSelectionView = PersonSelectionView(viewModel: self.model.selectionViewModel)
@@ -18,6 +18,8 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable {
     
     // TODO: 스크롤뷰로 별도의 뷰로 만들고, 별도의 뷰모델을 추가해야 할까...?
     var scrollView: UIScrollView = UIScrollView()
+    
+    var trashButton = UIBarButtonItem()
     
     init(viewModel: FirstModel) {
         self.model = viewModel
@@ -100,9 +102,9 @@ extension FirstViewController: Presentable {
         ]
         
         constraint += [
-            layoutSelectionView.widthAnchor.constraint(equalToConstant: 80),
-            layoutSelectionView.heightAnchor.constraint(equalToConstant: 80),
-            layoutSelectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            layoutSelectionView.widthAnchor.constraint(equalToConstant: 40),
+            layoutSelectionView.heightAnchor.constraint(equalToConstant: 40),
+            layoutSelectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
             layoutSelectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
         ]
     }
@@ -111,6 +113,12 @@ extension FirstViewController: Presentable {
         view.backgroundColor = .white
         
         navigationItem.title = "목록"
+        
+        navigationItem.rightBarButtonItem = trashButton
+        trashButton.addStyles(style: trashButtonStyling)
+        trashButton.target = self
+        trashButton.action = #selector(trashAction)
+        
         // TODO: 스크롤뷰 좌우 스크롤 관련해서 더 자연스럽게 처리
         scrollView.isPagingEnabled = true
     }
@@ -130,6 +138,20 @@ extension FirstViewController: Presentable {
                 self.scrollView.scrollToView(view: self.womanContentView, animated: true)
             }
         }
+        
+        model.propergateTrashItemButtonShow = { [weak self] isHidden in
+            guard let self = self else { return }
+            if isHidden {
+                self.navigationItem.setRightBarButton(self.trashButton, animated: true)
+            } else {
+                self.navigationItem.setRightBarButton(nil, animated: true)
+                
+            }
+        }
+    }
+    
+    @objc func trashAction() {
+        model.didTapTrashItemButton()
     }
 }
 

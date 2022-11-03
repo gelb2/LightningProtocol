@@ -12,10 +12,14 @@ class FirstModel: SceneActionReceiver {
     //input
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
+    var didTapTrashItemButton: () -> () = { }
+    
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
     
     @MainThreadActor var scrollSubject: ( (GenderType) -> () )?
+    
+    @MainThreadActor var propergateTrashItemButtonShow: ( (Bool) -> () )?
     
     var selectionViewModel: PersonSelectionViewModel {
         return privateSelectionViewModel
@@ -48,6 +52,7 @@ class FirstModel: SceneActionReceiver {
     }
     
     func populateData() {
+        // TODO: TASK Group으로 고도화
         Task {
             await requestAPI_man()
             await requestAPI_woman()
@@ -90,6 +95,16 @@ class FirstModel: SceneActionReceiver {
             }
         }
         
+        privateManViewModel.propergateThereIsItemsToDelete = { [weak self] in
+            guard let self = self else { return }
+            self.validateTrashItemButtonShow()
+        }
+        
+        privateWomanViewModel.propergateThereIsItemsToDelete = { [weak self] in
+            guard let self = self else { return }
+            self.validateTrashItemButtonShow()
+        }
+        
         privateManViewModel.propergateLargeImageURLString = { [weak self] urlString in
             guard let self = self else { return }
             let secondModel = SecondModel()
@@ -124,6 +139,11 @@ class FirstModel: SceneActionReceiver {
                 self.manViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
                 self.womanViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
             }
+        }
+        
+        didTapTrashItemButton = { [weak self] in
+            guard let self = self else { return }
+            self.showTrashItemConfirmAlert()
         }
     }
     
@@ -163,6 +183,32 @@ class FirstModel: SceneActionReceiver {
         } catch let error {
             handleError(error: error)
         }
+    }
+    
+    private func validateTrashItemButtonShow() {
+        let markedMan = privateManViewModel.dataSource.filter { $0.isSelected == true }
+        let markedWoman = privateWomanViewModel.dataSource.filter { $0.isSelected == true }
+        if markedMan.count > 0 || markedWoman.count > 0 {
+            propergateTrashItemButtonShow?(true)
+        } else {
+            propergateTrashItemButtonShow?(false)
+        }
+        
+    }
+    
+    private func showTrashItemConfirmAlert() {
+        let okAction = AlertActionDependency(title: "ok", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            print("ok Action called")
+            self.privateManViewModel.didReceiveTrashItemEvent()
+            self.privateWomanViewModel.didReceiveTrashItemEvent()
+        }
+        
+        let cancelAction = AlertActionDependency(title: "cancel", style: .cancel, action: nil)
+        
+        let alertDependency = AlertDependency(title: "경고", message: "정말로 삭제하겠습니까?", preferredStyle: .alert, actionSet: [okAction, cancelAction])
+        
+        routeSubject?(.alert(.itemAlert(.deleteSelectedItem(alertDependency))))
     }
     
     private func handleError(error: Error) {

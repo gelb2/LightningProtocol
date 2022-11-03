@@ -26,9 +26,14 @@ enum SceneCategory {
     
     enum alertScene {
         case networkAlert(networkError)
+        case itemAlert(itemRelated)
         
         enum networkError {
             case normalErrorAlert(AlertDependency)
+        }
+        
+        enum itemRelated {
+            case deleteSelectedItem(AlertDependency)
         }
         
         enum detailViewRelated {

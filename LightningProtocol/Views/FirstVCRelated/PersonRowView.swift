@@ -14,6 +14,7 @@ class PersonRowView: UIView, PersonRowCellStyling {
     var didReceiveViewModel: (PersonCellModel) -> () = { model in}
     
     //output
+    var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
     
@@ -21,6 +22,7 @@ class PersonRowView: UIView, PersonRowCellStyling {
     var locationLabel: UILabel = UILabel()
     var emailLabel: UILabel = UILabel()
     var profileImageView = CacheImageView()
+    var checkImageView = UIImageView()
     var verticalStackView = UIStackView()
     
     private var privateCellViewModel: PersonCellModel = PersonCellModel()
@@ -43,6 +45,7 @@ extension PersonRowView: Presentable {
         
         self.addSubview(profileImageView)
         self.addSubview(verticalStackView)
+        profileImageView.addSubview(checkImageView)
         
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(locationLabel)
@@ -56,6 +59,8 @@ extension PersonRowView: Presentable {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        checkImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
         
@@ -67,6 +72,13 @@ extension PersonRowView: Presentable {
         ]
         
         constraint += [
+            checkImageView.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 4),
+            checkImageView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: 4),
+            checkImageView.widthAnchor.constraint(equalToConstant: 32),
+            checkImageView.heightAnchor.constraint(equalTo: checkImageView.widthAnchor)
+        ]
+        
+        constraint += [
             verticalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             verticalStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
             verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
@@ -75,11 +87,13 @@ extension PersonRowView: Presentable {
         
     }
     
+    // TODO: style
     func configureView() {
         
         profileImageView.addStyles(style: cellProfileImageViewStyling)
         
         verticalStackView.addStyles(style: cellVerticalStackViewStyling)
+        checkImageView.addStyles(style: cellCheckImageViewStyling)
     }
     
     func bind() {
@@ -91,6 +105,14 @@ extension PersonRowView: Presentable {
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
+            self.privateCellViewModel.toggleUIAsSelectedEvent = self.toggleUIAsSelectedEvent
+        }
+        
+        toggleUIAsSelectedEvent = { [weak self] isSelected in
+            guard let self = self else { return }
+            print("rowView toggle isSelected \(isSelected)")
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }
     
@@ -126,7 +148,7 @@ struct PersonRowViewPreviewProvider: PreviewProvider {
         PersonRowViewPreview {
             let view = PersonRowView()
             return view
-        }.previewLayout(.fixed(width: 390, height: 100))
+        }.previewLayout(.fixed(width: 100, height: 100))
     }
 }
 

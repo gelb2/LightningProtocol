@@ -14,6 +14,7 @@ class PersonGridView: UIView, PersonGridCellStyling {
     var didReceiveViewModel: (PersonCellModel) -> () = { model in}
     
     //output
+    var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
     
@@ -21,6 +22,7 @@ class PersonGridView: UIView, PersonGridCellStyling {
     var locationLabel: UILabel = UILabel()
     var emailLabel: UILabel = UILabel()
     var profileImageView = CacheImageView()
+    var checkImageView = UIImageView()
     var verticalStackView = UIStackView()
     
     private var privateCellViewModel: PersonCellModel = PersonCellModel()
@@ -43,6 +45,7 @@ extension PersonGridView: Presentable {
         
         self.addSubview(profileImageView)
         self.addSubview(verticalStackView)
+        profileImageView.addSubview(checkImageView)
         
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(locationLabel)
@@ -56,6 +59,8 @@ extension PersonGridView: Presentable {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        checkImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
         
@@ -64,6 +69,13 @@ extension PersonGridView: Presentable {
             profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             profileImageView.heightAnchor.constraint(equalToConstant: 40),
             profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
+        ]
+        
+        constraint += [
+            checkImageView.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 4),
+            checkImageView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: 4),
+            checkImageView.widthAnchor.constraint(equalToConstant: 24),
+            checkImageView.heightAnchor.constraint(equalTo: checkImageView.widthAnchor)
         ]
         
         constraint += [
@@ -80,6 +92,7 @@ extension PersonGridView: Presentable {
         profileImageView.addStyles(style: cellProfileImageViewStyling)
         
         verticalStackView.addStyles(style: cellVerticalStackViewStyling)
+        checkImageView.addStyles(style: cellCheckImageViewStyling)
     }
     
     func bind() {
@@ -91,6 +104,14 @@ extension PersonGridView: Presentable {
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
+            self.privateCellViewModel.toggleUIAsSelectedEvent = self.toggleUIAsSelectedEvent
+        }
+        
+        toggleUIAsSelectedEvent = { [weak self] isSelected in
+            guard let self = self else { return }
+            print("rowView toggle isSelected \(isSelected)")
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }
     

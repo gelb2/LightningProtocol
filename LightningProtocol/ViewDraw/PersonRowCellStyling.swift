@@ -39,4 +39,11 @@ extension PersonRowCellStyling {
             $0.spacing = 4.0
         }
     }
+    
+    var cellCheckImageViewStyling: (UIImageView) -> () {
+        {
+            $0.image = UIImage(systemName: .checkMark)
+            $0.backgroundColor = .red
+        }
+    }
 }

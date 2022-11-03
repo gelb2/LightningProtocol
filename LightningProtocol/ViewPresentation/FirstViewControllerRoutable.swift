@@ -18,6 +18,8 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
         switch scene {
         case .detail(.secondViewController(let context)):
             nextScene = buildSecondScene(context: context)
+        case .alert(.itemAlert(.deleteSelectedItem(let context))):
+            nextScene = buildAlert(context: context)
         case .detail(.thirdViewController(let context)):
             nextScene = buildThirdScene(context: context)
         default: break
@@ -31,6 +33,10 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             self.navigationController?.pushViewController(nextVC, animated: true)
+        case .alert:
+            guard let scene = buildScene(scene: Scene) else { return }
+            guard let nextVC = scene as? UIViewController else { return }
+            present(nextVC, animated: true)
         case .detail(.thirdViewController):
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
@@ -47,6 +53,15 @@ protocol FirstViewControllerSceneBuildable: SceneBuildable {
 }
 
 extension FirstViewControllerSceneBuildable {
+    
+    func buildAlert(context: AlertDependency) -> Scenable {
+        let nextScene: Scenable
+        
+        let alert = AlertFactory(dependency: context).createAlert()
+        nextScene = alert
+        return nextScene
+    }
+    
     func buildSecondScene(context: SceneContext<SecondModel>) -> Scenable {
         var nextScene: Scenable
         let secondModel = context.dependency

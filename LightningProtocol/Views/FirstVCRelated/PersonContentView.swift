@@ -135,6 +135,7 @@ extension PersonContentView: Presentable {
         collectionView.delegate = self
         collectionView.register(PersonRowCell.self, forCellWithReuseIdentifier: rowCellIdentitier)
         collectionView.register(PersonGridCell.self, forCellWithReuseIdentifier: gridCellIdentifier)
+        collectionView.allowsMultipleSelection = true
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
@@ -202,7 +203,8 @@ extension PersonContentView: Presentable {
 extension PersonContentView: UICollectionViewDelegate {
     // TODO: 사진 선택시 뷰모델이 해당 클로저 호출하도록 추가 수정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.didSelectItem(indexPath.item)
+//        viewModel.didSelectItem(indexPath.item)
+        print("collectionView : \(collectionView.indexPathsForSelectedItems)")
     }
 }
 
@@ -214,7 +216,6 @@ extension PersonContentView: UICollectionViewDataSource {
     
     // TODO: 컴포지셔널 레이아웃에 따른 셀 디큐 다르게 하기 처리?
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cell for item check")
         switch layoutMode {
         case .list:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowCellIdentitier, for: indexPath) as? PersonRowCell else { fatalError() }
@@ -230,11 +231,9 @@ extension PersonContentView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("didEnd display check")
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("will display check")
         viewModel.didReceiveIndexPathItem(indexPath.item)
     }
     

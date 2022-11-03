@@ -17,6 +17,8 @@ class FirstModel: SceneActionReceiver {
     
     @MainThreadActor var scrollSubject: ( (GenderType) -> () )?
     
+    @MainThreadActor var propergateTrashItemButtonShow: ( (Bool) -> () )?
+    
     var selectionViewModel: PersonSelectionViewModel {
         return privateSelectionViewModel
     }
@@ -48,6 +50,7 @@ class FirstModel: SceneActionReceiver {
     }
     
     func populateData() {
+        // TODO: TASK Group으로 고도화
         Task {
             await requestAPI_man()
             await requestAPI_woman()
@@ -88,6 +91,16 @@ class FirstModel: SceneActionReceiver {
             Task {
                 await self.requestAPI_woman()
             }
+        }
+        
+        privateManViewModel.propergateThereIsItemsToDelete = { [weak self] in
+            guard let self = self else { return }
+            self.validateTrashItemButtonShow()
+        }
+        
+        privateWomanViewModel.propergateThereIsItemsToDelete = { [weak self] in
+            guard let self = self else { return }
+            self.validateTrashItemButtonShow()
         }
         
         privateManViewModel.propergateLargeImageURLString = { [weak self] urlString in
@@ -163,6 +176,17 @@ class FirstModel: SceneActionReceiver {
         } catch let error {
             handleError(error: error)
         }
+    }
+    
+    private func validateTrashItemButtonShow() {
+        let markedMan = privateManViewModel.dataSource.filter { $0.isSelected == true }
+        let markedWoman = privateWomanViewModel.dataSource.filter { $0.isSelected == true }
+        if markedMan.count > 0 || markedWoman.count > 0 {
+            propergateTrashItemButtonShow?(true)
+        } else {
+            propergateTrashItemButtonShow?(false)
+        }
+        
     }
     
     private func handleError(error: Error) {

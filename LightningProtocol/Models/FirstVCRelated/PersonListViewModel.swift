@@ -33,6 +33,8 @@ class PersonListViewModel {
     
     var populateRefreshCollectionLayoutEvent: (collectionType) -> () = { type in }
     
+    var propergateThereIsItemsToDelete: () -> () = { }
+    
     var dataSource: [PersonCellModel] {
         return privateDataSource
     }
@@ -93,12 +95,8 @@ class PersonListViewModel {
         
         didSelectItem = { [weak self] indexPathItem in
             guard let self = self else { return }
-//            let imageURL = self.findLargeImageURLString(indexPathItem)
-//            self.propergateLargeImageURLString(imageURL)
-            
             self.findAndMarkSelectedItem(indexPathItem)
-            
-            
+            self.propergateThereIsItemsToDelete()
         }
         
         didReceiveRefreshCollectionLayoutEvent = { [weak self] type in
@@ -127,7 +125,7 @@ class PersonListViewModel {
         let isSelected = privateDataSource[indexPathItem].isSelected
         privateDataSource[indexPathItem].didReceiveSelectedEvent(!isSelected)
     }
-    
+
     private func findLargeImageURLString(_ indexPathItem: Int) -> String {
         let imageURL = privateDataSource[indexPathItem].largeImageURLString
         return imageURL

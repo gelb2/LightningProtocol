@@ -112,7 +112,7 @@ class FirstModel: SceneActionReceiver {
             self.validateTrashItemButtonShow()
         }
         
-        privateManViewModel.propergateLargeImageURLString = { [weak self] urlString in
+        privateManViewModel.propergateProfileTapEvent = { [weak self] urlString in
             guard let self = self else { return }
             let secondModel = SecondModel()
             secondModel.largeImageURLString = urlString
@@ -120,7 +120,7 @@ class FirstModel: SceneActionReceiver {
             self.routeSubject?(.detail(.secondViewController(context: context)))
         }
         
-        privateWomanViewModel.propergateLargeImageURLString = { [weak self] urlString in
+        privateWomanViewModel.propergateProfileTapEvent = { [weak self] urlString in
             guard let self = self else { return }
             let secondModel = SecondModel()
             secondModel.largeImageURLString = urlString
@@ -206,7 +206,6 @@ class FirstModel: SceneActionReceiver {
     private func showTrashItemConfirmAlert() {
         let okAction = AlertActionDependency(title: "ok", style: .default) { [weak self] action in
             guard let self = self else { return }
-            print("ok Action called")
             self.privateManViewModel.didReceiveTrashItemEvent()
             self.privateWomanViewModel.didReceiveTrashItemEvent()
             self.validateTrashItemButtonShow()

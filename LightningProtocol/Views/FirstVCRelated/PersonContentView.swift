@@ -48,9 +48,7 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     }
     */
     
-    // TODO: 레이아웃 생성이 2회 이상 되는 걸로 확인...수정필요
     private func createListLayout() -> UICollectionViewCompositionalLayout {
-        print("create list layout")
         let itemFractionalWidthFraction = 1.0
         let groupFractionalHeightFraction = 1.0 / 6.0
         let itemInset: CGFloat = 2.5
@@ -74,8 +72,7 @@ class PersonContentView: UIView, PersonContentViewStyling, ActivityIndicatorView
     
     // TODO: 레이아웃 생성이 2회 이상 되는 걸로 확인...수정필요
     private func createGridLayout() -> UICollectionViewCompositionalLayout {
-        print("create grid layout")
-        
+
         let itemFractionalWidthFraction = 1.0 / 2.0
         let groupFractionalHeightFraction = 1.0 / 4.0
         let itemInset: CGFloat = 2.5
@@ -209,9 +206,6 @@ extension PersonContentView: UICollectionViewDelegate {
     //didSelectItem, cell이 선택 정보를 저장할거라고 믿지 말고 독자적으로 구현하기?
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.didSelectItem(indexPath.item)
-        
-        print("collectionView : \(collectionView.indexPathsForSelectedItems)")
-        
     }
 }
 

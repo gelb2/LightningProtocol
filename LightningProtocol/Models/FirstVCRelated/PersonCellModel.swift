@@ -10,8 +10,11 @@ import Foundation
 class PersonCellModel {
     //input
     var didReceiveSelectedEvent: (Bool) -> () = { isSelected in }
+    var didReceiveProfileTapEvent: () -> () = { }
+    var propergateProfileTapEvent: (String) -> () = { largeImageURL in }
     
     //output
+    
     
     //properties
     var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
@@ -43,10 +46,13 @@ class PersonCellModel {
     func bind() {
         didReceiveSelectedEvent = { [weak self] value in
             guard let self = self else { return }
-            print("cellModel isSelected : \(value)")
             self.isSelected = value
-            print("cellModel isSelected : -> \(self.isSelected)")
             self.toggleUIAsSelectedEvent(self.isSelected)
+        }
+        
+        didReceiveProfileTapEvent = { [weak self] in
+            guard let self = self else { return }
+            self.propergateProfileTapEvent(self.largeImageURLString)
         }
     }
 }

@@ -32,17 +32,19 @@ class PersonListViewModel {
     var populatePageIndex: (Int) -> () = { item in }
     var populateRefreshEvent: () -> () = { }
     
-    var propergateLargeImageURLString: (String) -> () = { largeImageURLString in }
-    
     var populateRefreshCollectionLayoutEvent: (collectionType) -> () = { type in }
     
     var propergateThereIsItemsToDelete: () -> () = { }
+    
+    var propergateProfileTapEvent: (String) -> () = { largeProfileImageURL in }
     
     var dataSource: [PersonCellModel] {
         return privateDataSource
     }
     
     //properties
+    private var didReceiveProfileTapEvent: (String) -> () = { largeProfileImageURL in }
+    
     private var privateDataSource: [PersonCellModel] = []
     
     private var pageIndex: Int = 1
@@ -111,6 +113,11 @@ class PersonListViewModel {
             guard let self = self else { return }
             self.findAndTrashSelectedItem()
         }
+        
+        didReceiveProfileTapEvent = { [weak self] profileImageURL in
+            guard let self = self else { return }
+            self.propergateProfileTapEvent(profileImageURL)
+        }
     }
     
     private func populateEntity(entity: RandomPeopleEntity) async -> [PersonCellModel] {
@@ -125,6 +132,7 @@ class PersonListViewModel {
             cellModel.thumbImageURLString = result.picture.thumbnail
             cellModel.mediumImageURLString = result.picture.medium
             cellModel.largeImageURLString = result.picture.large
+            cellModel.propergateProfileTapEvent = self.didReceiveProfileTapEvent
             return cellModel
         }
         return newData

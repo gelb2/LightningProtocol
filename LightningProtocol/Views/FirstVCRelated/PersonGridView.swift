@@ -17,6 +17,7 @@ class PersonGridView: UIView, PersonGridCellStyling {
     var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
+    var myTapGesture = UITapGestureRecognizer()
     
     var nameLabel: UILabel = UILabel()
     var locationLabel: UILabel = UILabel()
@@ -124,15 +125,18 @@ extension PersonGridView: Presentable {
         
         toggleUIAsSelectedEvent = { [weak self] isSelected in
             guard let self = self else { return }
-            print("rowView toggle isSelected \(isSelected)")
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
+        
+        myTapGesture.numberOfTapsRequired = 1
+        myTapGesture.addTarget(self, action: #selector(tapMethod))
+        profileImageView.addGestureRecognizer(myTapGesture)
+        profileImageView.isUserInteractionEnabled = true
     }
     
     @objc func tapMethod() {
+        privateCellViewModel.didReceiveProfileTapEvent()
     }
-    
-    
 }
 
 #if canImport(SwiftUI) && DEBUG

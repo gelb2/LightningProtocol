@@ -114,7 +114,6 @@ extension FirstViewController: Presentable {
         
         navigationItem.title = "목록"
         
-        navigationItem.rightBarButtonItem = trashButton
         trashButton.addStyles(style: trashButtonStyling)
         trashButton.target = self
         trashButton.action = #selector(trashAction)

@@ -15,13 +15,13 @@ enum SceneCategory {
     case alert(alertScene)
     
     enum mainScene {
-        case firstViewController(context: SceneContext<FirstModel>)
-        case firstViewControllerWithAction(context: SceneContext<FirstSceneAction>)
+        case personViewController(context: SceneContext<PersonModel>)
+        case personViewControllerWithAction(context: SceneContext<PersonSceneAction>)
     }
     
     enum detailScene {
-        case secondViewController(context: SceneContext<SecondModel>)
-        case thirdViewController(context: SceneContext<ThirdModel>)
+        case profileZoomViewController(context: SceneContext<ProfileZoomModel>)
+        case layoutSelectionViewController(context: SceneContext<LayoutSelectionModel>)
     }
     
     enum alertScene {

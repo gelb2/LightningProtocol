@@ -1,5 +1,5 @@
 //
-//  FirstModel.swift
+//  PersonModel.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FirstModel: SceneActionReceiver {
+class PersonModel: SceneActionReceiver {
     
     //input
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
@@ -114,30 +114,30 @@ class FirstModel: SceneActionReceiver {
         
         privateManViewModel.propergateProfileTapEvent = { [weak self] urlString in
             guard let self = self else { return }
-            let secondModel = SecondModel()
+            let secondModel = ProfileZoomModel()
             secondModel.largeImageURLString = urlString
             let context = SceneContext(dependency: secondModel)
-            self.routeSubject?(.detail(.secondViewController(context: context)))
+            self.routeSubject?(.detail(.profileZoomViewController(context: context)))
         }
         
         privateWomanViewModel.propergateProfileTapEvent = { [weak self] urlString in
             guard let self = self else { return }
-            let secondModel = SecondModel()
+            let secondModel = ProfileZoomModel()
             secondModel.largeImageURLString = urlString
             let context = SceneContext(dependency: secondModel)
-            self.routeSubject?(.detail(.secondViewController(context: context)))
+            self.routeSubject?(.detail(.profileZoomViewController(context: context)))
         }
         
         privateLayoutSelectionViewModel.populateTapEvent = { [weak self] in
             guard let self = self else { return }
-            let thirdModel = ThirdModel()
+            let thirdModel = LayoutSelectionModel()
             let context = SceneContext(dependency: thirdModel)
-            self.routeSubject?(.detail(.thirdViewController(context: context)))
+            self.routeSubject?(.detail(.layoutSelectionViewController(context: context)))
         }
         
         didReceiveSceneAction = { [weak self] action in
             guard let self else { return }
-            guard let action = action as? FirstSceneAction else { return }
+            guard let action = action as? PersonSceneAction else { return }
             
             switch action {
             case .refresh:

@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  ProfileZoomViewController.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class ProfileZoomViewController: UIViewController {
 
-    var model: SecondModel
+    var model: ProfileZoomModel
     
     lazy var contentView: ProfileZoomContentView = ProfileZoomContentView(viewModel: model.profileZoomContentViewModel)
     
-    init(viewModel: SecondModel) {
+    init(viewModel: ProfileZoomModel) {
         self.model = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -50,7 +50,7 @@ class SecondViewController: UIViewController {
 
 }
 
-extension SecondViewController: Presentable {
+extension ProfileZoomViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         self.view.addSubview(contentView)

@@ -10,7 +10,7 @@ import UIKit
 
 protocol SecondViewControllerRoutable: Routable, SecondViewControllerSceneBuildable { }
 
-extension SecondViewControllerRoutable where Self: SecondViewController {
+extension SecondViewControllerRoutable where Self: ProfileZoomViewController {
     
     func route(to Scene: SceneCategory) {
         switch Scene {
@@ -20,7 +20,7 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }
             present(nextVC, animated: true)
-        case .detail(.thirdViewController):
+        case .detail(.layoutSelectionViewController):
             guard let nextScene = buildScene(scene: Scene) as? UIViewController else { return }
             self.navigationController?.pushViewController(nextScene, animated: true)
         default: break
@@ -29,8 +29,8 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
     
     func sendAction(scene: SceneCategory) {
         switch scene {
-        case .main(.firstViewControllerWithAction(let context)):
-            guard let firstVC = self.navigationController?.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
+        case .main(.personViewControllerWithAction(let context)):
+            guard let firstVC = self.navigationController?.viewControllers.first(where: { $0 is PersonViewController }) as? PersonViewController else { return }
             let action = context.dependency
             firstVC.model.didReceiveSceneAction(action)
             break
@@ -43,13 +43,13 @@ protocol SecondViewControllerSceneBuildable: SceneBuildable {
     
 }
 
-extension SecondViewControllerSceneBuildable where Self: SecondViewController {
+extension SecondViewControllerSceneBuildable where Self: ProfileZoomViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
         case .alert(.networkAlert(.normalErrorAlert(let context))):
             nextScene = buildAlert(context: context)
-        case .detail(.thirdViewController(let context)):
+        case .detail(.layoutSelectionViewController(let context)):
             nextScene = buildThirdScene(context: context)
         default: break
         }
@@ -58,7 +58,7 @@ extension SecondViewControllerSceneBuildable where Self: SecondViewController {
     }
 }
 
-extension SecondViewControllerSceneBuildable where Self: SecondViewController {
+extension SecondViewControllerSceneBuildable where Self: ProfileZoomViewController {
     
     func buildAlert(context: AlertDependency) -> Scenable {
         let nextScene: Scenable
@@ -68,10 +68,10 @@ extension SecondViewControllerSceneBuildable where Self: SecondViewController {
         return nextScene
     }
     
-    func buildThirdScene(context: SceneContext<ThirdModel>) -> Scenable {
+    func buildThirdScene(context: SceneContext<LayoutSelectionModel>) -> Scenable {
         var nextScene: Scenable
         let thirdModel = context.dependency
-        let thirdVC = ThirdViewController(viewModel: thirdModel)
+        let thirdVC = LayoutSelectionViewController(viewModel: thirdModel)
         nextScene = thirdVC
         
         return nextScene

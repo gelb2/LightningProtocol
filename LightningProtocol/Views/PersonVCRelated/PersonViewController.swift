@@ -7,9 +7,9 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FirstViewControllerRoutable, FirstViewStyling {
+class PersonViewController: UIViewController, PersonViewControllerRoutable, PersonViewStyling {
 
-    var model: FirstModel
+    var model: PersonModel
     lazy var selectionView: PersonSelectionView = PersonSelectionView(viewModel: self.model.selectionViewModel)
     lazy var manContentView: PersonContentView = PersonContentView(viewModel: self.model.manViewModel)
     lazy var womanContentView: PersonContentView = PersonContentView(viewModel: self.model.womanViewModel)
@@ -21,7 +21,7 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable, FirstV
     
     var trashButton = UIBarButtonItem()
     
-    init(viewModel: FirstModel) {
+    init(viewModel: PersonModel) {
         self.model = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -45,7 +45,7 @@ class FirstViewController: UIViewController, FirstViewControllerRoutable, FirstV
 
 }
 
-extension FirstViewController: Presentable {
+extension PersonViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         
@@ -156,7 +156,7 @@ extension FirstViewController: Presentable {
     }
 }
 
-extension FirstViewController: UIScrollViewDelegate {
+extension PersonViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 

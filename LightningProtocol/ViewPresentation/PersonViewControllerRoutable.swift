@@ -1,5 +1,5 @@
 //
-//  FirstViewControllerRoutable.swift
+//  PersonViewControllerRoutable.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-protocol FirstViewControllerRoutable: Routable, FirstViewControllerSceneBuildable {
+protocol PersonViewControllerRoutable: Routable, PersonViewControllerSceneBuildable {
     
 }
 
-extension FirstViewControllerRoutable where Self: FirstViewController {
+extension PersonViewControllerRoutable where Self: PersonViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
-        case .detail(.secondViewController(let context)):
+        case .detail(.profileZoomViewController(let context)):
             nextScene = buildSecondScene(context: context)
         case .alert(.itemAlert(.deleteSelectedItem(let context))):
             nextScene = buildAlert(context: context)
-        case .detail(.thirdViewController(let context)):
+        case .detail(.layoutSelectionViewController(let context)):
             nextScene = buildThirdScene(context: context)
         default: break
         }
@@ -29,7 +29,7 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
     
     func route(to Scene: SceneCategory) {
         switch Scene {
-        case .detail(.secondViewController):
+        case .detail(.profileZoomViewController):
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -37,7 +37,7 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }
             present(nextVC, animated: true)
-        case .detail(.thirdViewController):
+        case .detail(.layoutSelectionViewController):
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             nextVC.modalPresentationStyle = .overFullScreen
@@ -48,11 +48,11 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
     }
 }
 
-protocol FirstViewControllerSceneBuildable: SceneBuildable {
+protocol PersonViewControllerSceneBuildable: SceneBuildable {
     
 }
 
-extension FirstViewControllerSceneBuildable {
+extension PersonViewControllerSceneBuildable {
     
     func buildAlert(context: AlertDependency) -> Scenable {
         let nextScene: Scenable
@@ -62,19 +62,19 @@ extension FirstViewControllerSceneBuildable {
         return nextScene
     }
     
-    func buildSecondScene(context: SceneContext<SecondModel>) -> Scenable {
+    func buildSecondScene(context: SceneContext<ProfileZoomModel>) -> Scenable {
         var nextScene: Scenable
         let secondModel = context.dependency
-        let secondVC = SecondViewController(viewModel: secondModel)
+        let secondVC = ProfileZoomViewController(viewModel: secondModel)
         nextScene = secondVC
         
         return nextScene
     }
     
-    func buildThirdScene(context: SceneContext<ThirdModel>) -> Scenable {
+    func buildThirdScene(context: SceneContext<LayoutSelectionModel>) -> Scenable {
         var nextScene: Scenable
         let model = context.dependency
-        let thirdVC = ThirdViewController(viewModel: model)
+        let thirdVC = LayoutSelectionViewController(viewModel: model)
         nextScene = thirdVC
         
         return nextScene

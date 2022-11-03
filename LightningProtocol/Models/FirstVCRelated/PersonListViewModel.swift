@@ -32,8 +32,6 @@ class PersonListViewModel {
     var populatePageIndex: (Int) -> () = { item in }
     var populateRefreshEvent: () -> () = { }
     
-    var propergateLargeImageURLString: (String) -> () = { largeImageURLString in }
-    
     var populateRefreshCollectionLayoutEvent: (collectionType) -> () = { type in }
     
     var propergateThereIsItemsToDelete: () -> () = { }

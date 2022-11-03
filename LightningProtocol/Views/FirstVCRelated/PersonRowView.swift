@@ -73,7 +73,7 @@ extension PersonRowView: Presentable {
         constraint += [
             checkImageView.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 4),
             checkImageView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: 4),
-            checkImageView.widthAnchor.constraint(equalToConstant: 8),
+            checkImageView.widthAnchor.constraint(equalToConstant: 32),
             checkImageView.heightAnchor.constraint(equalTo: checkImageView.widthAnchor)
         ]
         
@@ -104,6 +104,7 @@ extension PersonRowView: Presentable {
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }
     

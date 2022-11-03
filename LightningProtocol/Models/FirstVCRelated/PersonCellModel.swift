@@ -15,6 +15,7 @@ class PersonCellModel {
     var thumbImageURLString: String
     var mediumImageURLString: String
     var largeImageURLString: String
+    var isSelected: Bool
     
     init() {
         self.name = ""
@@ -24,6 +25,7 @@ class PersonCellModel {
         self.thumbImageURLString = ""
         self.mediumImageURLString = ""
         self.largeImageURLString = ""
+        self.isSelected = true
     }
 }
 

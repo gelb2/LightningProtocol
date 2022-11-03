@@ -1,5 +1,5 @@
 //
-//  ThirdViewControllerRoutable.swift
+//  LayoutSelectionViewControllerRoutable.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-protocol ThirdViewControllerRoutable: Routable, ThirdViewControllerSceneBuildable {
+protocol LayoutSelectionViewControllerRoutable: Routable, LayoutSelectionViewControllerSceneBuildable {
     
 }
     
-extension ThirdViewControllerRoutable where Self: ThirdViewController {
+extension LayoutSelectionViewControllerRoutable where Self: LayoutSelectionViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
@@ -25,7 +25,7 @@ extension ThirdViewControllerRoutable where Self: ThirdViewController {
         switch Scene {
         case .close:
             self.dismiss(animated: true)
-        case .main(.firstViewControllerWithAction):
+        case .main(.personViewControllerWithAction):
             sendAction(scene: Scene)
             self.dismiss(animated: true)
         case .alert:
@@ -38,9 +38,9 @@ extension ThirdViewControllerRoutable where Self: ThirdViewController {
     
     func sendAction(scene: SceneCategory) {
         switch scene {
-        case .main(.firstViewControllerWithAction(let context)):
+        case .main(.personViewControllerWithAction(let context)):
             guard let presentingNavi = self.presentingViewController as? UINavigationController else { return }
-            guard let firstVC = presentingNavi.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
+            guard let firstVC = presentingNavi.viewControllers.first(where: { $0 is PersonViewController }) as? PersonViewController else { return }
             let action = context.dependency
             firstVC.model.didReceiveSceneAction(action)
             break
@@ -49,11 +49,11 @@ extension ThirdViewControllerRoutable where Self: ThirdViewController {
     }
 }
 
-protocol ThirdViewControllerSceneBuildable: SceneBuildable {
+protocol LayoutSelectionViewControllerSceneBuildable: SceneBuildable {
     
 }
 
-extension ThirdViewControllerSceneBuildable {
+extension LayoutSelectionViewControllerSceneBuildable {
     func buildAlert(context: AlertDependency) -> Scenable {
         let nextScene: Scenable
         

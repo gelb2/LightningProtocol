@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThirdModel {
+class LayoutSelectionModel {
     //input
     
     //output
@@ -33,8 +33,8 @@ class ThirdModel {
         
         privateContentViewModel.propergateButtonTap = { [weak self] type in
             guard let self = self else { return }
-            let context = SceneContext(dependency: FirstSceneAction.refreshWithCollectionLayout(layout: type))
-            self.routeSubject?(.main(.firstViewControllerWithAction(context: context)))
+            let context = SceneContext(dependency: PersonSceneAction.refreshWithCollectionLayout(layout: type))
+            self.routeSubject?(.main(.personViewControllerWithAction(context: context)))
         }
     }
     

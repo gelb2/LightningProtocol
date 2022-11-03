@@ -1,5 +1,5 @@
 //
-//  SecondModel.swift
+//  ProfileZoomModel.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SecondModel {
+class ProfileZoomModel {
     
     //input
     var largeImageURLString: String?

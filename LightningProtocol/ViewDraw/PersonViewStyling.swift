@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-protocol FirstViewStyling: Styleable { }
+protocol PersonViewStyling: Styleable { }
 
-extension FirstViewStyling {
+extension PersonViewStyling {
     var trashButtonStyling: (UIBarButtonItem) -> () {
         {
             $0.image = UIImage(systemName: .trashImage)

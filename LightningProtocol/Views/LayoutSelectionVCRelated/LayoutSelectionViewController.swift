@@ -1,5 +1,5 @@
 //
-//  ThirdViewController.swift
+//  LayoutSelectionViewController.swift
 //  LightningProtocol
 //
 //  Created by pablo.jee on 2022/10/30.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController, ThirdViewControllerRoutable {
+class LayoutSelectionViewController: UIViewController, LayoutSelectionViewControllerRoutable {
     
-    var model: ThirdModel
+    var model: LayoutSelectionModel
     
     lazy var contentView = ContentView(viewModel: self.model.contentViewModel)
     
-    init(viewModel: ThirdModel) {
+    init(viewModel: LayoutSelectionModel) {
         self.model = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,7 +47,7 @@ class ThirdViewController: UIViewController, ThirdViewControllerRoutable {
 
 }
 
-extension ThirdViewController: Presentable {
+extension LayoutSelectionViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         self.view.backgroundColor = .clear

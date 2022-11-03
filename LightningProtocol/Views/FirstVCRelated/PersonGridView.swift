@@ -14,6 +14,7 @@ class PersonGridView: UIView, PersonGridCellStyling {
     var didReceiveViewModel: (PersonCellModel) -> () = { model in}
     
     //output
+    var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
     
@@ -73,7 +74,7 @@ extension PersonGridView: Presentable {
         constraint += [
             checkImageView.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 4),
             checkImageView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: 4),
-            checkImageView.widthAnchor.constraint(equalToConstant: 8),
+            checkImageView.widthAnchor.constraint(equalToConstant: 24),
             checkImageView.heightAnchor.constraint(equalTo: checkImageView.widthAnchor)
         ]
         
@@ -103,6 +104,14 @@ extension PersonGridView: Presentable {
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
+            self.privateCellViewModel.toggleUIAsSelectedEvent = self.toggleUIAsSelectedEvent
+        }
+        
+        toggleUIAsSelectedEvent = { [weak self] isSelected in
+            guard let self = self else { return }
+            print("rowView toggle isSelected \(isSelected)")
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }
     

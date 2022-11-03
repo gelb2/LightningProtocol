@@ -21,6 +21,7 @@ class PersonGridView: UIView, PersonGridCellStyling {
     var nameLabel: UILabel = UILabel()
     var locationLabel: UILabel = UILabel()
     var emailLabel: UILabel = UILabel()
+    var cellPhoneLabel: UILabel = UILabel()
     var profileImageView = CacheImageView()
     var checkImageView = UIImageView()
     var verticalStackView = UIStackView()
@@ -44,12 +45,13 @@ extension PersonGridView: Presentable {
     func initViewHierarchy() {
         
         self.addSubview(profileImageView)
+        self.addSubview(nameLabel)
         self.addSubview(verticalStackView)
         profileImageView.addSubview(checkImageView)
         
-        verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(locationLabel)
         verticalStackView.addArrangedSubview(emailLabel)
+        verticalStackView.addArrangedSubview(cellPhoneLabel)
         
         self.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -72,15 +74,21 @@ extension PersonGridView: Presentable {
         ]
         
         constraint += [
-            checkImageView.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 4),
-            checkImageView.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: 4),
+            checkImageView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+            checkImageView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
             checkImageView.widthAnchor.constraint(equalToConstant: 24),
             checkImageView.heightAnchor.constraint(equalTo: checkImageView.widthAnchor)
         ]
         
         constraint += [
+            nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 4),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4)
+        ]
+        
+        constraint += [
             verticalStackView.topAnchor.constraint(equalTo: self.profileImageView.bottomAnchor, constant: 8),
-            verticalStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
+            verticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ]
@@ -93,6 +101,11 @@ extension PersonGridView: Presentable {
         
         verticalStackView.addStyles(style: cellVerticalStackViewStyling)
         checkImageView.addStyles(style: cellCheckImageViewStyling)
+        
+        nameLabel.addStyles(style: cellNameLabelStyling)
+        locationLabel.addStyles(style: cellLocationLabelStyling)
+        emailLabel.addStyles(style: cellEmailLabelStyling)
+        cellPhoneLabel.addStyles(style: cellMobilePhoneLabelStyling)
     }
     
     func bind() {
@@ -103,6 +116,7 @@ extension PersonGridView: Presentable {
             self.nameLabel.text = self.privateCellViewModel.name
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
+            self.cellPhoneLabel.text = self.privateCellViewModel.mobilePhone
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
             self.privateCellViewModel.toggleUIAsSelectedEvent = self.toggleUIAsSelectedEvent

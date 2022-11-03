@@ -23,6 +23,7 @@ class PersonCellModel {
     var thumbImageURLString: String
     var mediumImageURLString: String
     var largeImageURLString: String
+    var mobilePhone: String
     var isSelected: Bool
     
     init() {
@@ -33,6 +34,7 @@ class PersonCellModel {
         self.thumbImageURLString = ""
         self.mediumImageURLString = ""
         self.largeImageURLString = ""
+        self.mobilePhone = ""
         self.isSelected = false
         
         bind()

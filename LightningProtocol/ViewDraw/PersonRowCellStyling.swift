@@ -43,6 +43,7 @@ extension PersonRowCellStyling {
     var cellCheckImageViewStyling: (UIImageView) -> () {
         {
             $0.image = UIImage(systemName: .checkMark)
+            $0.backgroundColor = .red
         }
     }
 }

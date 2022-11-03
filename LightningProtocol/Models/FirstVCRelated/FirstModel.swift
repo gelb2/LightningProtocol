@@ -12,6 +12,8 @@ class FirstModel: SceneActionReceiver {
     //input
     var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
+    var didTapTrashItemButton: () -> () = { }
+    
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
     
@@ -138,6 +140,11 @@ class FirstModel: SceneActionReceiver {
                 self.womanViewModel.didReceiveRefreshCollectionLayoutEvent(layout)
             }
         }
+        
+        didTapTrashItemButton = { [weak self] in
+            guard let self = self else { return }
+            self.showTrashItemConfirmAlert()
+        }
     }
     
     private func requestAPI_man_NextPage(pageIndex: Int) async {
@@ -187,6 +194,21 @@ class FirstModel: SceneActionReceiver {
             propergateTrashItemButtonShow?(false)
         }
         
+    }
+    
+    private func showTrashItemConfirmAlert() {
+        let okAction = AlertActionDependency(title: "ok", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            print("ok Action called")
+            self.privateManViewModel.didReceiveTrashItemEvent()
+            self.privateWomanViewModel.didReceiveTrashItemEvent()
+        }
+        
+        let cancelAction = AlertActionDependency(title: "cancel", style: .cancel, action: nil)
+        
+        let alertDependency = AlertDependency(title: "경고", message: "정말로 삭제하겠습니까?", preferredStyle: .alert, actionSet: [okAction, cancelAction])
+        
+        routeSubject?(.alert(.itemAlert(.deleteSelectedItem(alertDependency))))
     }
     
     private func handleError(error: Error) {

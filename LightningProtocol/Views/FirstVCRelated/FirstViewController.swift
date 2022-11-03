@@ -151,7 +151,7 @@ extension FirstViewController: Presentable {
     }
     
     @objc func trashAction() {
-        print("trash action called")
+        model.didTapTrashItemButton()
     }
 }
 

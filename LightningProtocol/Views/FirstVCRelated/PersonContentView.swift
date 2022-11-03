@@ -144,6 +144,11 @@ extension PersonContentView: Presentable {
             self.collectionView.reloadData()
         }
         
+        viewModel.didReceiveSomeItemTrashed = { [weak self] _ in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+        }
+        
         viewModel.turnOnRefreshControl = { [weak self] _ in
             guard let self = self else { return }
             self.collectionView.refreshControl?.beginRefreshing()

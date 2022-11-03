@@ -19,7 +19,10 @@ class PersonListViewModel {
     
     var didSelectItem: (Int) -> () = { indexPathItem in }
     
+    var didReceiveTrashItemEvent: () -> () = { }
+    
     //output
+    @MainThreadActor var didReceiveSomeItemTrashed: ( ((Void)) -> () )?
     @MainThreadActor var didReceiveViewModel: ( ((Void)) -> () )?
     @MainThreadActor var turnOnIndicator: ( ((Void)) -> () )?
     @MainThreadActor var turnOffIndicator: ( ((Void)) -> () )?
@@ -103,6 +106,11 @@ class PersonListViewModel {
             guard let self = self else { return }
             self.populateRefreshCollectionLayoutEvent(type)
         }
+        
+        didReceiveTrashItemEvent = { [weak self] in
+            guard let self = self else { return }
+            self.findAndTrashSelectedItem()
+        }
     }
     
     private func populateEntity(entity: RandomPeopleEntity) async -> [PersonCellModel] {
@@ -119,6 +127,11 @@ class PersonListViewModel {
             return cellModel
         }
         return newData
+    }
+    
+    private func findAndTrashSelectedItem() {
+        privateDataSource.removeAll { $0.isSelected == true }
+        didReceiveSomeItemTrashed?(())
     }
     
     private func findAndMarkSelectedItem(_ indexPathItem: Int) {

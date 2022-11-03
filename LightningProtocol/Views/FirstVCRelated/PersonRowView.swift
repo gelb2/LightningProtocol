@@ -14,6 +14,7 @@ class PersonRowView: UIView, PersonRowCellStyling {
     var didReceiveViewModel: (PersonCellModel) -> () = { model in}
     
     //output
+    var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
     //properties
     
@@ -104,6 +105,13 @@ extension PersonRowView: Presentable {
             self.locationLabel.text = self.privateCellViewModel.location
             self.emailLabel.text = self.privateCellViewModel.email
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
+            self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
+            self.privateCellViewModel.toggleUIAsSelectedEvent = self.toggleUIAsSelectedEvent
+        }
+        
+        toggleUIAsSelectedEvent = { [weak self] isSelected in
+            guard let self = self else { return }
+            print("rowView toggle isSelected \(isSelected)")
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected
         }
     }

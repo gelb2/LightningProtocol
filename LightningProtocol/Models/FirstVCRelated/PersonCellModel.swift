@@ -8,6 +8,14 @@
 import Foundation
 
 class PersonCellModel {
+    //input
+    var didReceiveSelectedEvent: (Bool) -> () = { isSelected in }
+    
+    //output
+    
+    //properties
+    var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
+    
     var name: String
     var location: String
     var email: String
@@ -25,7 +33,19 @@ class PersonCellModel {
         self.thumbImageURLString = ""
         self.mediumImageURLString = ""
         self.largeImageURLString = ""
-        self.isSelected = true
+        self.isSelected = false
+        
+        bind()
+    }
+    
+    func bind() {
+        didReceiveSelectedEvent = { [weak self] value in
+            guard let self = self else { return }
+            print("cellModel isSelected : \(value)")
+            self.isSelected = value
+            print("cellModel isSelected : -> \(self.isSelected)")
+            self.toggleUIAsSelectedEvent(self.isSelected)
+        }
     }
 }
 

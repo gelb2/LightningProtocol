@@ -205,6 +205,7 @@ extension PersonContentView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        viewModel.didSelectItem(indexPath.item)
         print("collectionView : \(collectionView.indexPathsForSelectedItems)")
+        
     }
 }
 

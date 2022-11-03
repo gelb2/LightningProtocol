@@ -14,6 +14,8 @@ class FirstModel: SceneActionReceiver {
     
     var didTapTrashItemButton: () -> () = { }
     
+    var scrollToGenderTapMonitor: (GenderType) -> () = { type in }
+    
     //output
     @MainThreadActor var routeSubject: ( (SceneCategory) -> () )?
     
@@ -60,6 +62,11 @@ class FirstModel: SceneActionReceiver {
     }
     
     private func bind() {
+        
+        scrollToGenderTapMonitor = { [weak self] type in
+            guard let self = self else { return }
+            self.privateSelectionViewModel.didSegmentChange(type)
+        }
         
         privateSelectionViewModel.propergateSelectedTypeToRelatedModel = { [weak self] genderType in
             guard let self = self else { return }

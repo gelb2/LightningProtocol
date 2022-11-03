@@ -11,7 +11,7 @@ class PersonSelectionViewModel {
     
     //input
     var didSegmentChange: (GenderType) -> () = { type in }
-    
+
     //output
     var populateSelectedTypeToSelectionView: (GenderType) -> () = { type in }
     var propergateSelectedTypeToRelatedModel: (GenderType) -> () = { type in }

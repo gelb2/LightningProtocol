@@ -123,6 +123,8 @@ extension FirstViewController: Presentable {
     }
     
     func bind() {
+        scrollView.delegate = self
+        
         model.routeSubject = { [weak self] sceneCategory in
             guard let self = self else { return }
             self.route(to: sceneCategory)
@@ -154,3 +156,19 @@ extension FirstViewController: Presentable {
     }
 }
 
+extension FirstViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        let manViewFrame = scrollView.convert(manContentView.bounds, from: manContentView)
+        let womanViewFrame = scrollView.convert(womanContentView.bounds, from: womanContentView)
+        
+        if manViewFrame.intersects(scrollView.bounds) {
+            model.scrollToGenderTapMonitor(.male)
+        }
+        
+        if womanViewFrame.intersects(scrollView.bounds) {
+            model.scrollToGenderTapMonitor(.female)
+        }
+    }
+}

@@ -54,12 +54,46 @@ class PersonModel: SceneActionReceiver {
     }
     
     func populateData() {
-        // TODO: TASK Group으로 고도화
         Task {
-            await requestAPI_man()
-            await requestAPI_woman()
+            await requestAPI_initial()
         }
     }
+    
+    private func requestAPI_initial() async {
+        
+        return await withTaskGroup(of: Void.self) { [weak self] group in
+            guard let self = self else { return }
+            
+            group.addTask {
+                await  self.requestAPI_woman()
+            }
+            
+            group.addTask {
+                await self.requestAPI_man()
+            }
+        }
+    }
+    
+//    private func testrequestAPI_man() async -> RandomPeopleEntity {
+//        // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
+//        do {
+//            let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: 1, gender: .male)))
+//            try await Task.sleep(nanoseconds: 5_000_000_000)
+//            return manEntity
+//        } catch let error {
+//            handleError(error: error)
+//        }
+//    }
+//
+//    private func testrequestAPI_woman() async -> RandomPeopleEntity {
+//        // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
+//        do {
+//            let womanEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.woman(resultCount: 10, pageIndex: 1, gender: .female)))
+//            return womanEntity
+//        } catch let error {
+//            handleError(error: error)
+//        }
+//    }
     
     private func bind() {
         
@@ -176,6 +210,7 @@ class PersonModel: SceneActionReceiver {
         // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
         do {
             let manEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.man(resultCount: 10, pageIndex: 1, gender: .male)))
+            try await Task.sleep(nanoseconds: 5_000_000_000)
             privateManViewModel.didReceiveEntityToRefreshAll(manEntity)
         } catch let error {
             handleError(error: error)
@@ -186,6 +221,7 @@ class PersonModel: SceneActionReceiver {
         // TODO: 엔티티를 이렇게 두 뷰모델에 그냥 넣어도 되나 좀 더 생각해보기...
         do {
             let womanEntity: RandomPeopleEntity = try await repository.fetch(api: .randomUser(.woman(resultCount: 10, pageIndex: 1, gender: .female)))
+            try await Task.sleep(nanoseconds: 5_000_000_000)
             privateWomanViewModel.didReceiveEntityToRefreshAll(womanEntity)
         } catch let error {
             handleError(error: error)

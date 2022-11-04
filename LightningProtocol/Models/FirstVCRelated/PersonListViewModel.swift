@@ -121,7 +121,7 @@ class PersonListViewModel {
     }
     
     private func populateEntity(entity: RandomPeopleEntity) async -> [PersonCellModel] {
-        
+        // TODO: 셀모델이 아웃풋 별도로 만들어서 리턴하게 수정...엔티티는 모델에 그냥 값만 넘겨주게...
         let newData = entity.results.map { result -> PersonCellModel in
             let cellModel = PersonCellModel()
             cellModel.name = "[\(result.name.title)]" + " " + result.name.first + " " + result.name.last

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PopupView: UIView {
+class PopupView: UIView, PopupViewStyling {
 
     var viewModel: PopupViewModel
     
@@ -55,14 +55,11 @@ extension PopupView: Presentable {
     }
     
     func configureView() {
-        // TODO: style
         self.backgroundColor = .white
-        verticalStackView.axis = .vertical
+        verticalStackView.addStyles(style: verticalStackViewStyle)
         
-        listButton.setTitle("리스트", for: .normal)
-        listButton.setTitleColor(.black, for: .normal)
-        gridButton.setTitle("그리드", for: .normal)
-        gridButton.setTitleColor(.black, for: .normal)
+        listButton.addStyles(style: listButtonStyle)
+        gridButton.addStyles(style: gridButtonStyle)
     }
     
     func bind() {

@@ -16,7 +16,6 @@ class PersonViewController: UIViewController, PersonViewControllerRoutable, Pers
     
     lazy var layoutSelectionView: LayoutSelectionView = LayoutSelectionView(viewModel: self.model.layoutSelectionViewModel)
     
-    // TODO: 스크롤뷰로 별도의 뷰로 만들고, 별도의 뷰모델을 추가해야 할까...?
     var scrollView: UIScrollView = UIScrollView()
     
     var trashButton = UIBarButtonItem()
@@ -82,8 +81,6 @@ extension PersonViewController: Presentable {
             scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ]
         
-        // TODO: 스크롤뷰 서브뷰 관련 오토레이아웃 다시 확인
-        
         constraint += [
             manContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             manContentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
@@ -117,8 +114,7 @@ extension PersonViewController: Presentable {
         trashButton.addStyles(style: trashButtonStyling)
         trashButton.target = self
         trashButton.action = #selector(trashAction)
-        
-        // TODO: 스크롤뷰 좌우 스크롤 관련해서 더 자연스럽게 처리
+
         scrollView.isPagingEnabled = true
     }
     

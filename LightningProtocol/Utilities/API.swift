@@ -45,7 +45,6 @@ enum API {
         }
     }
 
-    // TODO: 쿼리 잘 넣는 방법 다시 생각좀...
     private var getMethodQuerySet: [URLQueryItem] {
         switch self {
         case .randomUser(.man(let resultCount, let pageIndex, let gender)):

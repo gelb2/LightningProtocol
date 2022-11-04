@@ -88,7 +88,6 @@ extension PersonRowView: Presentable {
         
     }
     
-    // TODO: style
     func configureView() {
         
         profileImageView.addStyles(style: cellProfileImageViewStyling)

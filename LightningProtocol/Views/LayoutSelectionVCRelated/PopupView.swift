@@ -55,7 +55,7 @@ extension PopupView: Presentable {
     }
     
     func configureView() {
-        // TODO: styling
+        // TODO: style
         self.backgroundColor = .white
         verticalStackView.axis = .vertical
         

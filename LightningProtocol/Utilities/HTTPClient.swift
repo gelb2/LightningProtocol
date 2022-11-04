@@ -25,7 +25,6 @@ enum HTTPError: Error {
 
 protocol HTTPClientProtocol {
     func fetch<T: Codable>(api: API) async throws -> T
-    func sendData<T: Codable>(api: API, object: T) async throws
 }
 
 class HTTPClient: HTTPClientProtocol {
@@ -48,30 +47,5 @@ class HTTPClient: HTTPClientProtocol {
             throw HTTPError.errorDecodingData
         }
         return object
-    }
-    
-    // TODO: fetch처럼 api enum 받도록 수정
-    func sendData<T: Codable>(api: API, object: T) async throws {
-        
-        let baseComponent = api.urlComponets
-        let httpMethod = api.httpMethod.rawValue
-        guard let url = baseComponent?.url else { throw HTTPError.badURL }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
-        request.addValue(MINEType.JSON.rawValue,
-                         forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
-        
-        request.httpBody = try? JSONEncoder().encode(object)
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw HTTPError.badResponse
-        }
-        
-        guard let object = try? JSONDecoder().decode(T.self, from: data) else {
-            throw HTTPError.errorDecodingData
-        }
     }
 }

@@ -54,36 +54,22 @@ class PersonModel: SceneActionReceiver {
     }
     
     func populateData() {
-        // TODO: TASK Group으로 고도화
-
-        //11.402896881103516e-05
-        let timer = ParkBenchTimer()
         Task {
-            await requestAPI_man()
-            await requestAPI_woman()
-            timer.stop()
+            await requestAPI_initial()
         }
-
-        //5.9617390632629395
-//        let timer = ParkBenchTimer()
-//        Task {
-//            await taskGroupCheck()
-//            timer.stop()
-//        }
-        
-        
     }
     
-    private func taskGroupCheck() async {
+    private func requestAPI_initial() async {
         
         return await withTaskGroup(of: Void.self) { [weak self] group in
             guard let self = self else { return }
-            group.addTask {
-                await self.requestAPI_man()
-            }
             
             group.addTask {
                 await  self.requestAPI_woman()
+            }
+            
+            group.addTask {
+                await self.requestAPI_man()
             }
         }
     }

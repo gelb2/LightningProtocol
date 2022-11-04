@@ -116,7 +116,7 @@ extension PersonGridView: Presentable {
             self.privateCellViewModel = model
             self.nameLabel.text = self.privateCellViewModel.name
             self.locationLabel.text = self.privateCellViewModel.location
-            self.emailLabel.text = self.privateCellViewModel.email
+            self.emailLabel.text = self.privateCellViewModel.mail
             self.cellPhoneLabel.text = self.privateCellViewModel.mobilePhone
             self.profileImageView.loadImage(urlString: self.privateCellViewModel.thumbImageURLString)
             self.checkImageView.isHidden = !self.privateCellViewModel.isSelected

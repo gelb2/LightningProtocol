@@ -14,30 +14,70 @@ class PersonCellModel {
     var propergateProfileTapEvent: (String) -> () = { largeImageURL in }
     
     //output
+    var name: String {
+        return "[\(title)]" + " " + firstName + " " + lastName
+    }
+    
+    var location: String {
+        return country + " / " + state + " / " + city
+    }
+    
+    var mail: String {
+        return email
+    }
+    
+    var mobilePhone: String {
+        return phone
+    }
+    
+    var thumbImageURLString: String {
+        return thumbURL
+    }
+    
+    var largeImageURLString: String {
+        return largeURL
+    }
     
     
     //properties
     var toggleUIAsSelectedEvent: (Bool) -> () = { isSelected in }
     
-    var name: String
-    var location: String
+    var title: String
+    var firstName: String
+    var lastName: String
+    
+    var country: String
+    var state: String
+    var city: String
+
     var email: String
     var uuid: String
-    var thumbImageURLString: String
-    var mediumImageURLString: String
-    var largeImageURLString: String
-    var mobilePhone: String
+    
+    var thumbURL: String
+    var mediumURL: String
+    var largeURL: String
+    
+    var phone: String
     var isSelected: Bool
     
     init() {
-        self.name = ""
-        self.location = ""
+        self.title = ""
+        self.firstName = ""
+        self.lastName = ""
+        
+        self.country = ""
+        self.state = ""
+        self.city = ""
+
         self.email = ""
         self.uuid = ""
-        self.thumbImageURLString = ""
-        self.mediumImageURLString = ""
-        self.largeImageURLString = ""
-        self.mobilePhone = ""
+        
+        self.thumbURL = ""
+        
+        self.mediumURL = ""
+        self.largeURL = ""
+        
+        self.phone = ""
         self.isSelected = false
         
         bind()

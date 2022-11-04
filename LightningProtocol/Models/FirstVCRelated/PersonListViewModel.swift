@@ -124,14 +124,19 @@ class PersonListViewModel {
         // TODO: 셀모델이 아웃풋 별도로 만들어서 리턴하게 수정...엔티티는 모델에 그냥 값만 넘겨주게...
         let newData = entity.results.map { result -> PersonCellModel in
             let cellModel = PersonCellModel()
-            cellModel.name = "[\(result.name.title)]" + " " + result.name.first + " " + result.name.last
-            cellModel.location = result.location.country + " / " + result.location.state + " / " + result.location.city
+            cellModel.title = result.name.title
+            cellModel.firstName = result.name.first
+            cellModel.lastName = result.name.last
+            cellModel.country = result.location.country
+            cellModel.state = result.location.state
+            cellModel.city = result.location.city
             cellModel.email = result.email
             cellModel.uuid = result.login.uuid
-            cellModel.mobilePhone = result.cell
-            cellModel.thumbImageURLString = result.picture.thumbnail
-            cellModel.mediumImageURLString = result.picture.medium
-            cellModel.largeImageURLString = result.picture.large
+            cellModel.thumbURL = result.picture.thumbnail
+            cellModel.mediumURL = result.picture.medium
+            cellModel.largeURL = result.picture.large
+            cellModel.phone = result.phone
+            
             cellModel.propergateProfileTapEvent = self.didReceiveProfileTapEvent
             return cellModel
         }

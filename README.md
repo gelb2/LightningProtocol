@@ -99,16 +99,12 @@
 
 # 기능
 
-![데이터 삭제](README%20ca936a7d28d54f1fb7ce068ad4273dc5/2_MP4_AdobeExpress.gif)
 
-데이터 삭제
+## 데이터 불러오기 + 삭제
+<img src="https://user-images.githubusercontent.com/24997407/200156325-5cb3b7fd-5cbf-4920-926f-e07aec354d3a.gif" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/24997407/200156330-841f65bc-81ab-47ed-ad5f-f33b13d98eed.gif" width="30%"></img>
 
-![컴포지셔널 레이아웃 변경](README%20ca936a7d28d54f1fb7ce068ad4273dc5/3_MP4_AdobeExpress.gif)
-
-컴포지셔널 레이아웃 변경
-
-![프로필이미지 확대 축소](README%20ca936a7d28d54f1fb7ce068ad4273dc5/4_MP4_AdobeExpress.gif)
-
-프로필이미지 확대 축소
-
+## 레이아웃 변경 + 프로필 이미지 확대 축소
+<img src="https://user-images.githubusercontent.com/24997407/200156333-77d7eb54-8792-4593-bfcf-c62316fabb18.gif" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/24997407/200156334-c6b6f70f-3a57-4d82-9e65-4a1b069e52e9.gif" width="30%"></img>
 ---

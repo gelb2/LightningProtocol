@@ -5,13 +5,13 @@
 ## MVVM
 
 - MVVM 패턴
-- UIViewController에서 작성할 수 있는 UITableView, UIButton 등 UI컴포넌트 관련 로직을 최대한 타 클래스로 이관
+- UIViewController에서 작성할 수 있는 UICollectionView, UIButton 등 UI컴포넌트 관련 로직을 최대한 타 클래스로 이관
 - 모델, 뷰모델, 뷰 간에 일어날 수 있는 데이터의 흐름, 사용자 입력 이벤트의 전달은 클로저를 통해 처리
     
     ### Model
     
     - 비즈니스 로직
-    - Repostiory를 통해 DataBase 관련 클래스와 상호작용
+    - Repostiory를 통해 HTTP호출 관련 클래스와 상호작용
     - ViewModel의 초기화, ViewModel과의 참조 관계 설정
     - 초기화 시 Repository를 주입 받음
     
@@ -25,8 +25,8 @@
     
     ### View
     
-    - UITableView, UIButton등 UI컴포넌트를 add한 뷰
-    - UITableViewDelegate, DataSource 역할을 겸함
+    - UICollectionView, UIButton등 UI컴포넌트를 add한 뷰
+    - UICollectionViewDelegate, DataSource 역할을 겸함
     - UIButton Action 등 사용자 입력 이벤트를 수신
     - 사용자 입력 이벤트, 입력값 등 별도 처리가 필요한 사항은 ViewModel로 전달
     - 필요시 2개 이상의 View를 ViewController에 addSubView할 수 있음
@@ -74,9 +74,8 @@
     ## Programmatic UI
     
     - 스토리보드 - xib 미사용, 오토레이아웃으로 컨스트레인트 설정
-    - UIViewController와 같은 클래스에는 별도의 UI컴포넌트를 붙이지 않음. 대신 UIView를 필요에 따라 2, 3개 이상 생성 후 addSubView를 진행.
-    - addSubView된 UIView가 UITableView, UIButton 등의 UI컴포넌트를 소유
-    - addSubView된 UIView가 UITableViewDelegate, DataSource의 역할을 수행
+    - addSubView된 UIView가 UICollectionView, UIButton 등의 UI컴포넌트를 소유
+    - addSubView된 UIView가 UICollectionViewDelegate, DataSource의 역할을 수행
     
     ## UI Attribute - Presentable
     
